@@ -1,0 +1,65 @@
+/* styles.css if for cumulative styling!
+However, to change style of a specific hX element,
+you can just change its hX style code individually
+eg <h2 style="color:magenta">Style:color</h2>
+*/
+
+h2 {
+  color: pink;
+  text-align:center;
+  font-family: Arial, sans-serif
+  /* include more fonts jic some browsers do not support the first ones*/
+}
+
+div{
+  background-color:pink;
+  border:3px solid blue;
+  /* OR border:3px dotted blue */
+  text-align:center;
+  font-size: 28px;
+  font-family:Arial, sans-serif;
+  width:200px;
+  height:30px;
+  margin-left:auto;
+  margin-right: auto;
+  padding:20px;
+}
+
+table{
+  border: 2px solid grey;
+  border-collapse: collapse; /*removes double border*/
+  width: 50%;
+}
+
+th, td{
+  border:1px solid grey;
+  padding:5px;
+  text-align: center;
+}
+
+th{
+  background-color: lightyellow;
+}
+
+#top,#middle, #bottom{
+  all:initial;
+  color:purple;
+}
+
+#top{
+  font-size:36px;
+}
+
+#middle{
+  font-size:24px;
+}
+
+#bottom{
+  all:
+  font-size: 12px;
+}
+
+.name{
+  font-weight:bold;
+  color:blue;
+}
