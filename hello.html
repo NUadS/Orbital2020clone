@@ -3,46 +3,44 @@
   <head>
     <title>Orbital2020: NUadS</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- scale according to width of device -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
 
   <body>
-    <h1 style="color:blue;text-align:center">Welcome to NUadS! n_n</h1>
+    <h1 style="color:blue;text-align:center">Welcome to <span class="name">
+      NUadS</span>! n_n</h1>
 
-    <div id="top">
-      This is the <span class="name">top</span> of my webpage.
-    </div>
+    <div id="showcasediv">Testing out divider style</div>
 
-    <div>Style:color</div>
-    Selecting colors: google-->html color picker-->hex code
-    <p style="color:#f74fb1">Pink</p>
-    <p style="color:#3dfffc">Turquoise</p>
-
-    <h2>Feature: list</h2>
-    Unordered list:
-    <ul>
-      <li>Item 1</li>
-      <li>Item 2</li>
-    </ul>
+    <h2 id="feature1">Feature: list</h2>
     Ordered list:
     <ol>
       <li>Item 1</li>
       <li>Item 2</li>
+      <!-- list inside list -->
+      <ul>
+        <li>Item A</li>
+        <li>Item B</li>
+      </ul>
     </ol>
+    Unordered list:
+    <ul>
+      <li><a href="#feature1"> Feature1</a></li>
+      <li><a href="#feature2"> Feature2</a></li>
+      <li><a href="#feature3"> Feature3</a></li>
+    </ul>
 
-    <div id="middle">
-      This is the <span class="name">middle</span> of my webpage.
-    </div>
 
-
-    <h2>Feature: image</h2>
-    (.jpg image must be inside your repository file)
+    <h2 id="feature2">Feature: image</h2>
+    <!-- .jpg image must be inside your repository file -->
     Fixed pixels:
     <img src="dawn.jpg" height="200" width="300">
     Fixed proportion:
     <img src="dawn.jpg" width=70%>
 
 
-    <h2>Feature: table</h2>
+    <h2 id="feature3">Feature: table</h2>
     <h3>Table of Locations</h3>
     <table>
       <tr>
@@ -56,20 +54,64 @@
     </table>
 
 
-    <h2>Feature: form</h2>
+    <h2 id="feature4">Feature: form</h2>
     <form>
-      <input type="text" placeholder="Full Name" name="Name">
+      <div>
+      <input type="text" name="name" placeholder="Full Name">
+      <input type="number" name="name" placeholder="Age">
+      <input type="password" name="password" placeholder="Password">
+      </div>
+
+      <div>
+        Favourite color?
+        <input type="radio" name="color" value="red">Red
+        <input type="radio" name="color" value="green"> Green
+        <input type="radio" name="color" value="blue"> Blue
+        <input type="radio" name="color" value="other"> Other
+      </div>
+
+      <div>
+        <input name="country" list="countries" placeholder="Country">
+        <datalist id="countries">
+          <option value="Singapore">
+          <option value="United States">
+      </div>
+
       <button>Submit!</button>
     </form>
 
-    <h2>Feature: id and span</h2>
+    <h2 id="feature5">Feature: external link</h2>
+    <a href="hello.html"> hello.html!</a>
+    <!-- if html, href link should be located inside the same folder. else: -->
+    <a href="https://google.com"> Google!</a>
 
-    <div id="bottom">
-      This is the <span class="name">bottom</span> of my webpage.
+    <h2 id="feature6">Feature: Flexbox</h2>
+    <div class="container">
+      <div>Roses are red</div>
+      <div>Violets are blue</div>
+      <div>Sabbie is here</div>
+      <div>So hello to you!!!!!</div>
+      <div>This is kahehe</div>
+      <div>With an orbitting head</div>
+      <div>What a time</div>
+      <div>To be alive</div>
+      <div>Oh raspberry pie ~</div>
     </div>
 
-    Here is my new feature line!
 
+    <h2 id="feature7">Feature: Grid</h2>
+
+
+
+
+
+    <h2 id="feature8">Feature: random</h2>
+    <!-- Selecting colors: google -> html color picker ->hex code -->
+    <p style="color:#f74fb1">Pink</p>
+    <p style="color:#3dfffc">Turquoise</p>
+    <p class="screen-only">This paragraph wont appear when you print</p>
+
+    Here is my new feature line!
 
   </body>
 </html>
