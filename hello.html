@@ -3,12 +3,21 @@
   <head>
     <title>Orbital2020: NUadS</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- VERY USEFUL Bootstrap link for automatic styling:
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+    -->
+    <!-- Refer here for bootstrap components:
+    https://getbootstrap.com/docs/3.3/components/ -->
     <!-- scale according to width of device -->
+    <link rel="stylesheet" href="variables.css"
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   </head>
 
   <body>
-    <h1 style="color:blue;text-align:center">Welcome to <span class="name">
+    <h1>Welcome to <span class="name">
       NUadS</span>! n_n</h1>
 
     <div id="showcasediv">Testing out divider style</div>
@@ -81,9 +90,10 @@
     </form>
 
     <h2 id="feature5">Feature: external link</h2>
-    <a href="hello.html"> hello.html!</a>
+    <a href="hello.html"> hello.htm!</a>
     <!-- if html, href link should be located inside the same folder. else: -->
-    <a href="https://google.com"> Google!</a>
+    <div></div>
+    <a href="https://google.com"> Google</a>
 
     <h2 id="feature6">Feature: Flexbox</h2>
     <div class="container">
@@ -91,21 +101,39 @@
       <div>Violets are blue</div>
       <div>Sabbie is here</div>
       <div>So hello to you!!!!!</div>
-      <div>This is kahehe</div>
-      <div>With an orbitting head</div>
-      <div>What a time</div>
-      <div>To be alive</div>
-      <div>Oh raspberry pie ~</div>
+      <div>Here's a joke for you</div>
+      <div>And your orbitting head!</div>
+      <div>I went into a pet shop</div>
+      <div>And asked for twelve bees!</div>
+      <div>The owner counted thirteen</div>
+      <div>And passed them to me!</div>
+      <div>Oh no! i exclaimed</div>
+      <div>You've given me one too many!</div>
+      <div>Hoho he said,</div>
+      <div>That one's a freebie!</div>
+      <div>exdee...</div>
     </div>
 
 
     <h2 id="feature7">Feature: Grid</h2>
+    <div class="grid">
+      <div class="grid-item">1</div>
+      <div class="grid-item">2</div>
+      <div class="grid-item">3</div>
+      <div class="grid-item">4</div>
+      <div class="grid-item">5</div>
+      <div class="grid-item">6</div>
+      <div class="grid-item">7</div>
+      <div class="grid-item">8</div>
+      <div class="grid-item">9</div>
+    </div>
 
+    <h2 id="feature8">Feature: Alerts using scss inheritance</h2>
+    <div class="success">This is a success message</div>
+    <div class="warning">This is a warning message</div>
+    <div class="error">This is an error message</div>
 
-
-
-
-    <h2 id="feature8">Feature: random</h2>
+    <h2 id="feature9">Feature: random</h2>
     <!-- Selecting colors: google -> html color picker ->hex code -->
     <p style="color:#f74fb1">Pink</p>
     <p style="color:#3dfffc">Turquoise</p>

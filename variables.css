@@ -1,0 +1,178 @@
+@charset "UTF-8";
+body {
+  font-family: "Trebuchet MS", "Lucida Grande";
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+h1 {
+  color: skyBlue;
+}
+
+h2 {
+  color: pink;
+  text-decoration: underline;
+}
+
+/* when h2 is selected, these changes will be made */
+h2::selection {
+  background-color: lightYellow;
+}
+
+.name {
+  font-weight: bold;
+  color: pink;
+}
+
+#showcasediv {
+  background-color: lavender;
+  border: 3px solid skyBlue;
+  /* OR border:3px dotted blue */
+  text-align: center;
+  font-size: 20px;
+  width: 500px;
+  height: 30px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div {
+  padding: 15px;
+}
+
+/* styling for a, before/after its assigned text */
+a::before {
+  content: "🍭Click here:";
+  font-weight: bold;
+}
+
+a::after {
+  content: " | 🎅";
+}
+
+ul li {
+  color: black;
+}
+
+/* selects immediate children from ordered list. grandchildren,
+aka nested elements will not be affected */
+ol > li {
+  color: black;
+}
+
+table {
+  border: 2px solid black;
+  border-collapse: collapse;
+  /*removes double border*/
+  width: 50%;
+}
+
+/* styling applies to multiple elements: use comma */
+th, td {
+  border: 1px solid grey;
+  padding: 5px;
+  text-align: center;
+}
+
+th {
+  background-color: paleTurquoise;
+}
+
+input[type=text] {
+  background-color: lavender;
+}
+
+input[type=password] {
+  background-color: lavender;
+}
+
+button {
+  width: 200px;
+  height: 50px;
+  font-size: 24px;
+  background-color: paleTurquoise;
+}
+
+/* when cursor hovers button */
+button:hover {
+  background-color: lavender;
+}
+
+.error, .warning, .success {
+  font-family: sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  border: 1px solid black;
+  padding: 20px;
+  margin: 20px;
+}
+
+.success {
+  background-color: paleTurquoise;
+}
+
+.warning {
+  background-color: bisque;
+}
+
+.error {
+  background-color: hotPink;
+}
+
+@media print {
+  .screen-only {
+    display: none;
+  }
+}
+/* controlling background color and content depending on width of screen */
+@media (min-width: 800px) {
+  body {
+    background-color: azure;
+  }
+
+  h1::before {
+    content: "Konichiwa! ";
+  }
+}
+@media (max-width: 799px) {
+  body {
+    background-color: lavenderBlush;
+  }
+
+  h1::before {
+    content: "Hello! ";
+  }
+}
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container > div {
+  background-color: lavender;
+  font-size: 20px;
+  margin: 20px;
+  padding: 20px;
+  width: 200px;
+  text-align: center;
+}
+
+.grid {
+  background-color: dodgerBlue;
+  display: grid;
+  padding: 20px;
+  grid-column-gap: 20px;
+  grid-row-gap: 10px;
+  grid-template-columns: 200px 200px auto;
+  /* ^ how wide i want each column to be: 200px for first 2,
+  remaining space for last one */
+}
+
+.grid-item {
+  background-color: white;
+  font-size: 20px;
+}
+
+/*# sourceMappingURL=variables.css.map */
