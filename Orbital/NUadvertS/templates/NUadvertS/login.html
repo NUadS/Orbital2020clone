@@ -1,25 +1,31 @@
 {% extends 'NUadvertS/base.html' %}
 {% block body_block %}
-<div id="login_head"><h1> NUADVERTS</h1></div>
-  <div id="box">
-        <h2 id="login"> Log in to your account</h2>
-
-        <form method="POST" action="{% url 'NUadvertS:user_login' %}">
-          {% csrf_token %}
-          <div class="form-group col-md-12">
-            <label for="username"> Username </label>
-            <input type="text" name="username" class="form-control"  placeholder="Enter username">
-          </div>
-          
-          <div class="form-group col-md-12">
-            <label for="password"> Password </label>
-            <input type="password" name="password" class="form-control" placeholder="Password">
-          </div>
-          <input class="btn btn-primary custom1 col-md-11" type="submit" name="" value="Login">
-        </form>
-        <div class="text-muted loginreg">
-          Not a user? Register <a href="{% url 'NUadvertS:register' %}">here</a>
-        </div>
-  </div>
-
-{% endblock %}
+ 
+  <div id="login-box" class="box">
+    <h2>Login</h2>
+    <form method="POST" action="{% url 'NUadvertS:user_login' %}" id="login_form" >
+      {% csrf_token %}
+      <div class="user-box">
+        <input type="text" name="username" required="">
+        <label for="username">Username</label>
+      </div>
+      <div class="user-box">
+        <input type="password" name="password" required="">
+        <label for="password">Password</label>
+      </div>
+      <a href="#" onclick= "document.getElementById('login_form').submit()" id="login-submit-button">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Login
+      </a>
+    </form>
+    <div class="text-muted">
+      <br>
+      Not a user? Register <a href="{% url 'NUadvertS:register' %}">here</a>
+      <br> &copy NUadvertS 2020
+    </div>
+  </div> 
+  
+  {% endblock %}

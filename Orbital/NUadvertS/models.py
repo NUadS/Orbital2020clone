@@ -4,20 +4,20 @@ from datetime import date
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
+
 # Create your models here.
 class UserProfileInfo(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField('Full Name',max_length=200)
     matriculationNumber = models.CharField('Matric Number',
-    max_length=10, default='AXXXXXXXB')
+    max_length=10,help_text='AXXXXXXXB')
     age = models.IntegerField()
-    dob = models.DateField('Date of Birth', default=date.today)
+    dob = models.DateField('Date of Birth', help_text='yyyy-mm-dd')
     genderChoices = [('Female','F'),('Male','M')]
     gender = models.CharField(max_length=10, choices=genderChoices)
-    email = models.EmailField(max_length=200, blank=True)
-
+    email = models.EmailField(max_length=200, blank=False)
     portfolio_site = models.URLField(blank=True)
-    profile_pic = models.ImageField(upload_to='profile_pics',blank=True)
+    profile_pic = models.ImageField(upload_to='profile_pics', blank=True)
 
     countryChoices = [
     ('AF', 'AFGHANISTAN'),
