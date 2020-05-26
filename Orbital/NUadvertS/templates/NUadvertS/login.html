@@ -1,6 +1,6 @@
 {% extends 'NUadvertS/base.html' %}
 {% block body_block %}
- 
+
   <div id="login-box" class="box">
     <h2>Login</h2>
     <form method="POST" action="{% url 'NUadvertS:user_login' %}" id="login_form" >
@@ -23,9 +23,9 @@
     </form>
     <div class="text-muted">
       <br>
-      Not a user? Register <a href="{% url 'NUadvertS:register' %}">here</a>
+      Not a user? Register <a href="{% url 'NUadvertS:register' %}"> here</a>
       <br> &copy NUadvertS 2020
     </div>
-  </div> 
-  
+  </div>
+
   {% endblock %}

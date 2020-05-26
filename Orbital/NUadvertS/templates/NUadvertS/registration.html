@@ -9,7 +9,7 @@
         <h2> Create your account</h2>
 
         <!-- Form -->
-        <form enctype="multipart/form-data" method="POST" action="{% url 'NUadvertS:register' %}" id="registration_form">          
+        <form enctype="multipart/form-data" method="POST" action="{% url 'NUadvertS:register' %}" id="registration_form">
           {% csrf_token %}
 
         <!-- Username & PW in same row -->
@@ -18,20 +18,20 @@
 
             <div class="form-group col-md-6 mb-0">
               <div class="registration-input">
-              {{ user_form.username}} 
+              {{ user_form.username}}
               <label for="username"> Username</label>
             </div>
             </div>
 
             <div class="form-group col-md-6 mb-0">
               <div class="registration-input">
-                {{ user_form.password}} 
+                {{ user_form.password}}
                 <label for="password"> Password </label>
               </div>
             </div>
 
           </div>
-          
+
           <!-- Email to be in a single row -->
           <div class="form-row user-box">
             <div class="form-group col-md-12 mb-0">
@@ -79,7 +79,7 @@
             </div>
           </div>
 
-          
+
           <!-- matric in one row  -->
             <div class="form-row user-box">
             <div class="form-group col-md-12 mb-0">
@@ -101,7 +101,7 @@
               <label for="year_in_school"> Year in School </label>
             </div>
             </div>
-            
+
             <div class="form-group col-md-3 mb-0">
               <div class="registration-input-dropdown">
               {{ profile_form.faculty}}
@@ -116,9 +116,9 @@
             </div>
             </div>
 
-            
+
         </div>
-      
+
 
           <!-- profile pic in one row -->
           <div class="form-row user-box">
@@ -129,7 +129,7 @@
             </div>
             </div>
           </div>
-          
+
           <!-- Submit Button-->
           <a href="#" onclick= "document.getElementById('registration_form').submit()" id="registration-submit-button">
             <span></span>
@@ -140,7 +140,7 @@
           </a>
         </form>
 
-        <div class="text-muted", id="reglog">
+        <div class="text-muted" id="reglog" >
          Already a user? Login <a href="{% url 'NUadvertS:user_login' %}">here</a>
          <br> &copy NUadvertS 2020
         </div>

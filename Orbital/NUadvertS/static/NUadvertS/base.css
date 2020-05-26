@@ -1,46 +1,255 @@
-/* All pages before login: Laptop bg image, no navigation bar, indented*/
-        html {
-            height: 100%;
-        }
-        body {
-            background-image: url(bg1.png);
-            background-size: cover;
-            margin-left: 450px;
-            font-family: sans-serif;
-        }
+/* All pages before login: Black bg, no navigation bar, indented*/
+html {
+  height: 100%;
+}
+body {
+  /* background-image: url(bg3.jpg); */
+  /* background-size: cover; */
+  background-color: black;
+  margin: auto;
+  font-family: "Trebuchet MS", monospace;
+}
+
+div{
+  padding:5px;
+}
+
+  /*title: NUadvertS on index page*/
+
+@font-face {
+  font-family: Clip;
+  src: url("https://acupoftee.github.io/fonts/Clip.ttf");
+}
 
 
-/*Index page styling */
-        /* Welcome to NUadvertS styling */
-        h1{
-            font-weight: 500;
-            font-size:50px;
-            white-space: nowrap;
-        }
+.sign {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 75%;
+  height: 75%;
+  background-image: radial-gradient(
+    ellipse 50% 20% at 50% 50%,
+    #6b1839,
+    transparent
+  );
+  transform: translate(-50%, -50%);
+  letter-spacing: 2;
+  left: 50%;
+  top: 50%;
+  font-family: "Clip";
+  text-transform: uppercase;
+  font-size: 6em;
+  color: #ffe6ff;
+  text-shadow: 0 0 0.6rem #ffe6ff, 0 0 1.5rem #ff65bd,
+    -0.2rem 0.1rem 1rem #ff65bd, 0.2rem 0.1rem 1rem #ff65bd,
+    0 -0.5rem 2rem #ff2483, 0 0.5rem 3rem #ff2483;
+  animation: shine 2s forwards, flicker 5s infinite;
+}
 
-        /* Text below h1 styling */
-        h2{ 
-            font-size: 25px;
-            margin-left: 60px;
-        }
+@keyframes blink {
+  0%,
+  22%,
+  36%,
+  75% {
+    color: #ffe6ff;
+    text-shadow: 0 0 0.6rem #ffe6ff, 0 0 1.5rem #ff65bd,
+      -0.2rem 0.1rem 1rem #ff65bd, 0.2rem 0.1rem 1rem #ff65bd,
+      0 -0.5rem 2rem #ff2483, 0 0.5rem 3rem #ff2483;
+  }
+  28%,
+  33% {
+    color: #ff65bd;
+    text-shadow: none;
+  }
+  82%,
+  97% {
+    color: #ff2483;
+    text-shadow: none;
+  }
+}
 
-        /* Text styling for index page (White text, middle of page)*/
-        #index{
-            color: white;
-            margin-top: 375px;
-        }
+.flicker {
+  animation: shine 2s forwards, blink 3s 2s infinite;
+}
 
-        /*Styling for login & register buttons on index page (both in middle of page)*/
-        #Buttons{
-            margin-top: 25px;
-            margin-left: 220px;
-        }
+.fast-flicker {
+  animation: shine 2s forwards, blink 10s 1s infinite;
+}
 
-        /*Styling for logout button on index page(if user is logged in) */
-        .custom3{
-            margin-left:60px;
-        }
+@keyframes shine {
+  0% {
+    color: #6b1839;
+    text-shadow: none;
+  }
+  100% {
+    color: #ffe6ff;
+    text-shadow: 0 0 0.6rem #ffe6ff, 0 0 1.5rem #ff65bd,
+      -0.2rem 0.1rem 1rem #ff65bd, 0.2rem 0.1rem 1rem #ff65bd,
+      0 -0.5rem 2rem #ff2483, 0 0.5rem 3rem #ff2483;
+  }
+}
 
+@keyframes flicker {
+  from {
+    opacity: 1;
+  }
+
+  4% {
+    opacity: 0.9;
+  }
+
+  6% {
+    opacity: 0.85;
+  }
+
+  8% {
+    opacity: 0.95;
+  }
+
+  10% {
+    opacity: 0.9;
+  }
+
+  11% {
+    opacity: 0.922;
+  }
+
+  12% {
+    opacity: 0.9;
+  }
+
+  14% {
+    opacity: 0.95;
+  }
+
+  16% {
+    opacity: 0.98;
+  }
+
+  17% {
+    opacity: 0.9;
+  }
+
+  19% {
+    opacity: 0.93;
+  }
+
+  20% {
+    opacity: 0.99;
+  }
+
+  24% {
+    opacity: 1;
+  }
+
+  26% {
+    opacity: 0.94;
+  }
+
+  28% {
+    opacity: 0.98;
+  }
+
+  37% {
+    opacity: 0.93;
+  }
+
+  38% {
+    opacity: 0.5;
+  }
+
+  39% {
+    opacity: 0.96;
+  }
+
+  42% {
+    opacity: 1;
+  }
+
+  44% {
+    opacity: 0.97;
+  }
+
+  46% {
+    opacity: 0.94;
+  }
+
+  56% {
+    opacity: 0.9;
+  }
+
+  58% {
+    opacity: 0.9;
+  }
+
+  60% {
+    opacity: 0.99;
+  }
+
+  68% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 0.9;
+  }
+
+  72% {
+    opacity: 0.95;
+  }
+
+  93% {
+    opacity: 0.93;
+  }
+
+  95% {
+    opacity: 0.95;
+  }
+
+  97% {
+    opacity: 0.93;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+  /*login, register buttons on index page*/
+
+.btns{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  flex-direction: row;
+  font-family: "Trebuchet MS", monospace;
+  box-sizing: border-box;
+  margin-top:200px;
+}
+.btn{
+  color: #FFFFFF;
+  border: 1.5px solid #FFFFFF;
+  border-radius: 7px;
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 40px;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  transition: 0.5s;
+
+}
+.btn:hover{
+  background-color: #ffe6ff;
+  color: #050801;
+  box-shadow: 0px 0px 5px #ff65bd, 0px 0px 25px #ff65bd, 0px 0px 50px #ff65bd, 0px 0px 100px #ff65bd;
+  -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+}
 
 /*Registration/Login container styling */
         .box {
@@ -92,7 +301,7 @@
         .help-text{
             margin-top:-25px;
         }
-        
+
         .box .user-box label{
             position: absolute;
             top:0;
@@ -126,7 +335,7 @@
             letter-spacing: 4px
         }
 
-        
+
         .box a:hover {
             background: #03e9f4;
             color: #fff;
@@ -235,14 +444,14 @@
         /*register button of registration form*/
         #registration-submit-button{
             position: absolute;
-            top: 650px;
-            left: 40px;   
+            top: 770px;
+            left: 40px;
         }
 
         /* login button on register page */
         #reglog{
             position:absolute;
-            top: 700px;
+            top: 820px;
             left: 40px;
         }
 
@@ -250,14 +459,10 @@
     /*Container for login form */
         #login-box{
             width: 400px;
-        }     
-    
+        }
+
     /* Login button of login form */
         #login-submit-button{
             position: relative;
             margin-top:40px;
         }
-
-    
-        
-        

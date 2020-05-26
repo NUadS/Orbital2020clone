@@ -5,16 +5,17 @@
     {% if user.is_authenticated %}
         <h2>Hello {{ user.username }}</h2>
         <a class="btn btn-primary custom3" href="{% url 'logout' %}" role="button">Logout</a>
- 
+
         {% else %}
-        <h1>WELCOME TO NUadvertS</h1>
-        <h2>A one-stop, comprehensive survey platform</h2>
-        <div id="Buttons">
-        <a class="btn btn-primary btn-lg" href="{% url 'NUadvertS:user_login' %}" role="button">Login</a>
-        <a class="btn btn-primary btn-lg" href="{% url 'NUadvertS:register' %}" role="button">Register</a>
+        <div class="sign">
+          <span class="flicker">NU</span>advert<span class="flicker">S</span>
         </div>
-</div>    
+
+        <div class="btns">
+          <a class="btn" href="{% url 'NUadvertS:user_login' %}" role="button">Login</a>
+          <a class="btn" href="{% url 'NUadvertS:register' %}" role="button">Register</a>
+        </div>
+        
+</div>
     {% endif %}
 {% endblock %}
-
- 
