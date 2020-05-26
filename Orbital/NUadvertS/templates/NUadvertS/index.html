@@ -1,13 +1,21 @@
 {% extends "NUadvertS/base.html" %}
 {% block body_block %}
-<div class="container">
-  <div class="jumbotron">
-    <h1>Welcome to the NUadvertS !</h1>
+<div id="index">
+    <!-- After authentication part to be changed: redirect to dashboard -->
     {% if user.is_authenticated %}
         <h2>Hello {{ user.username }}</h2>
-    {% else %}
-        <h2>Register or Login if you'd like to</h2>
-    {% endif %}
-  </div>
+        <a class="btn btn-primary custom3" href="{% url 'logout' %}" role="button">Logout</a>
+
+        {% else %}
+        <div class="sign">
+          <span class="flicker">NU</span>advert<span class="flicker">S</span>
+        </div>
+
+        <div class="btns">
+          <a class="btn" href="{% url 'NUadvertS:user_login' %}" role="button">Login</a>
+          <a class="btn" href="{% url 'NUadvertS:register' %}" role="button">Register</a>
+        </div>
+        
 </div>
+    {% endif %}
 {% endblock %}

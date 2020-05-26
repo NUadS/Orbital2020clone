@@ -1,21 +1,150 @@
 {% extends "NUadvertS/base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block body_block %}
-  <div class="container">
-    <div class="jumbotron">
+<div id="registration-box" class="box">
       {% if registered %}
-        <h1>Thank you for registering!</h1>
+        <h1>You have successfully created your account. Thank you for registering!</h1>
       {% else %}
-        <h1>Registration Form</h1>
-        <h4>Just fill out the form.</h3>
-<form enctype="multipart/form-data" method="POST">
+        <h2> Create your account</h2>
+
+        <!-- Form -->
+        <form enctype="multipart/form-data" method="POST" action="{% url 'NUadvertS:register' %}" id="registration_form">
           {% csrf_token %}
-          {{ user_form.as_p }}
-          {{ profile_form.as_p }}
-          <input type="submit" name="" value="Register">
+
+        <!-- Username & PW in same row -->
+
+          <div class="form-row user-box">
+
+            <div class="form-group col-md-6 mb-0">
+              <div class="registration-input">
+              {{ user_form.username}}
+              <label for="username"> Username</label>
+            </div>
+            </div>
+
+            <div class="form-group col-md-6 mb-0">
+              <div class="registration-input">
+                {{ user_form.password}}
+                <label for="password"> Password </label>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Email to be in a single row -->
+          <div class="form-row user-box">
+            <div class="form-group col-md-12 mb-0">
+              <div class="registration-input">
+              {{ profile_form.email}}
+              <label for="email"> Email </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- nationality, age, dob, gender, residential type to be in a single row -->
+          <div class="form-row user-box">
+            <div class="form-group col-md-3 mb-0">
+            <div class="registration-input-dropdown">
+              {{ profile_form.nationality}}
+              <label for="nationality"> Nationality </label>
+              </div>
+            </div>
+            <div class="form-group col-md-2 mb-0">
+              <div class="registration-input">
+              {{ profile_form.age}}
+              <label for="age"> Age </label>
+              </div>
+            </div>
+            <div class="form-group col-md-3 mb-0">
+              <div class="registration-input">
+              {{ profile_form.dob}}
+              <label for="dob"> Date of Birth </label>
+              <div class="help-text">
+              {{profile_form.dob.help_text}}
+            </div>
+            </div>
+            </div>
+            <div class="form-group col-md-2 mb-0">
+              <div class="registration-input-dropdown">
+              {{ profile_form.gender}}
+              <label for="gender"> Gender </label>
+            </div>
+            </div>
+            <div class="form-group col-md-2 mb-0">
+              <div class="registration-input-dropdown">
+              {{ profile_form.currentresidentialtype}}
+              <label for="currentresidentialtype"> Residential Type </label>
+            </div>
+            </div>
+          </div>
+
+
+          <!-- matric in one row  -->
+            <div class="form-row user-box">
+            <div class="form-group col-md-12 mb-0">
+              <div class="registration-input">
+              {{ profile_form.matriculationNumber}}
+              <label for="matriculationNumber"> Matric Number </label>
+              <div class="help-text">
+              {{profile_form.matriculationNumber.help_text}}
+              </div>
+            </div>
+            </div>
+          </div>
+
+          <!-- year, faculty, degree in one row  -->
+          <div class="form-row user-box">
+            <div class="form-group col-md-2 mb-0">
+              <div class="registration-input-dropdown">
+              {{ profile_form.year_in_school}}
+              <label for="year_in_school"> Year in School </label>
+            </div>
+            </div>
+
+            <div class="form-group col-md-3 mb-0">
+              <div class="registration-input-dropdown">
+              {{ profile_form.faculty}}
+              <label for="faculty"> Faculty </label>
+            </div>
+          </div>
+
+            <div class="form-group col-md-7 mb-0">
+              <div class="registration-input">
+              {{ profile_form.degree}}
+              <label for="degree"> Degree </label>
+            </div>
+            </div>
+
+
+        </div>
+
+
+          <!-- profile pic in one row -->
+          <div class="form-row user-box">
+            <div class="form-group col-md-12 mb-0">
+              <div class="registration-input-dropdown">
+              {{ profile_form.profile_pic}}
+              <label for="profile_pic"> Profile Picture</label>
+            </div>
+            </div>
+          </div>
+
+          <!-- Submit Button-->
+          <a href="#" onclick= "document.getElementById('registration_form').submit()" id="registration-submit-button">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+              Submit
+          </a>
         </form>
 
+        <div class="text-muted" id="reglog" >
+         Already a user? Login <a href="{% url 'NUadvertS:user_login' %}">here</a>
+         <br> &copy NUadvertS 2020
+        </div>
+
       {% endif %}
-    </div>
   </div>
 {% endblock %}

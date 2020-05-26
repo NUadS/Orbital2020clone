@@ -1,17 +1,31 @@
 {% extends 'NUadvertS/base.html' %}
 {% block body_block %}
-  <div class="container">
-    <div class="jumbotron">
-      <h1>Login here :</h1>
-<form method="post" action="{% url 'NUadvertS:user_login' %}">
-          {% csrf_token %}
-          {# A more "HTML" way of creating the login form#}
-          <label for="username">Username:</label>
-          <input type="text" name="username" placeholder="Username">
-<label for="password">Password:</label>
-          <input type="password" name="password" placeholder="Password">
-<input type="submit" name="" value="Login">
-</form>
-</div>
+
+  <div id="login-box" class="box">
+    <h2>Login</h2>
+    <form method="POST" action="{% url 'NUadvertS:user_login' %}" id="login_form" >
+      {% csrf_token %}
+      <div class="user-box">
+        <input type="text" name="username" required="">
+        <label for="username">Username</label>
+      </div>
+      <div class="user-box">
+        <input type="password" name="password" required="">
+        <label for="password">Password</label>
+      </div>
+      <a href="#" onclick= "document.getElementById('login_form').submit()" id="login-submit-button">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Login
+      </a>
+    </form>
+    <div class="text-muted">
+      <br>
+      Not a user? Register <a href="{% url 'NUadvertS:register' %}"> here</a>
+      <br> &copy NUadvertS 2020
+    </div>
   </div>
-{% endblock %}
+
+  {% endblock %}

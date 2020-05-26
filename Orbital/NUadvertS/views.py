@@ -14,10 +14,12 @@ def index(request):
 @login_required
 def special(request):
     return HttpResponse("You are logged in !")
+
 @login_required
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))
+
 def register(request):
     registered = False
     if request.method == 'POST':
@@ -43,6 +45,9 @@ def register(request):
                           {'user_form':user_form,
                            'profile_form':profile_form,
                            'registered':registered})
+
+
+                           
 def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
