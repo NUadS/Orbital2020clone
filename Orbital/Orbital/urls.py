@@ -27,7 +27,7 @@ from survey import views as survey_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^',include('survey.urls')),
-    url(r'^$',survey_views.index,name='index'),
+    url(r'^$',accounts_views.index,name='index'),
     url(r'^special/',accounts_views.special,name='special'),
     url(r'^accounts/',include('accounts.urls')),
     url(r'^logout/$', accounts_views.user_logout, name='logout'),

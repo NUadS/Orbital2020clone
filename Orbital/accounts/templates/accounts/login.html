@@ -1,4 +1,11 @@
-{% extends 'survey/base.html' %}
+{% extends 'accounts/base.html' %}
+
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'accounts/accounts.css' %}"><link rel="stylesheet" type="text/css" href="{% static 'survey/index.css' %}">
+{% endblock %}
+
+
 {% block body_block %}
 
   <div id="login-box" class="box">
@@ -24,7 +31,7 @@
     <div class="text-muted">
       <br>
       Not a user? Register <a href="{% url 'accounts:register' %}"> here</a>
-      <br> &copy accounts 2020
+      <br> &copy NUadvertS 2020
     </div>
   </div>
 

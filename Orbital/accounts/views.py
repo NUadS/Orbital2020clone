@@ -8,6 +8,9 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 
+def index(request):
+    return render(request, 'accounts/index.html')
+
 @login_required
 def special(request):
     return HttpResponse("You are logged in !")
@@ -53,7 +56,7 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request,user)
-                return HttpResponseRedirect(reverse('index'))
+                return render(request,'survey/dashboard.html')
             else:
                 return HttpResponse("Your account was inactive.")
         else:

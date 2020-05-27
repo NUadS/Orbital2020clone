@@ -1,13 +1,12 @@
-{% extends "survey/base.html" %}
+{% extends "accounts/base.html" %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'accounts/index.css' %}">
+{% endblock %}
+
 {% block body_block %}
 <div id="index">
-    <!-- After authentication part to be changed: redirect to dashboard -->
-    {% if user.is_authenticated %}
-        <!-- include navi bar here -->
-        <h2>Hello {{ user.username }}</h2>
-        <a class="btn btn-primary custom3" href="{% url 'logout' %}" role="button">Logout</a>
 
-        {% else %}
         <div class="sign">
           <span class="flicker">NU</span>advert<span class="flicker">S</span>
         </div>
@@ -18,5 +17,5 @@
         </div>
         
 </div>
-    {% endif %}
+    
 {% endblock %}

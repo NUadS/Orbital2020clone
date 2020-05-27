@@ -12,5 +12,4 @@ app_name = 'survey'
 # ]
 
 urlpatterns=[
-    url(r'^$',views.index,name='index')
 ]

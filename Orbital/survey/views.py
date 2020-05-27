@@ -4,7 +4,5 @@ from django.urls import reverse
 
 
 
-def index(request):
-    return render(request, 'survey/index.html')
 
 
