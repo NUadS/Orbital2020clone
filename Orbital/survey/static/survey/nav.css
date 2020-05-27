@@ -1,0 +1,64 @@
+/*navigation bar*/
+@font-face{
+  font-family: Oswald;
+  src:url('https://fonts.googleapis.com/css?family=Oswald') format('truetype');
+}
+
+.navbarheader {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  height:100px;
+  position:fixed;
+
+}
+nav {
+  display: flex;
+  justify-content: center;
+
+}
+.navbarlist {
+  display: flex;
+  list-style-type: none;
+}
+.navbarlist a {
+  margin: 10px 30px;
+  position: relative;
+  color: white;
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.navbarlist a:before {
+  position: absolute;
+  bottom: -2px;
+  content: '';
+  width: 100%;
+  height: 3px;
+  background: #ff1ead;
+  transform: translateX(-100%);
+  opacity: 0;
+}
+.navbarlist a:hover:before {
+  opacity: 1;
+  transition: 0.5s transform ease, 0.8s opacity ease;
+  transform: translateX(0);
+}
+.navbarlist .active {
+  color: #ff1ead;
+}
+.navbarlist .active:hover:before {
+  opacity: 0;
+}
+
+#logout{
+  margin-left: 20px;
+}
