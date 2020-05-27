@@ -1,0 +1,17 @@
+/* Base css: Black bg, no navigation bar, indented*/
+html {
+  height: 100%;
+}
+body {
+  /* background-image: url(bg3.jpg); */
+  /* background-size: cover; */
+  background-color: black;
+  margin: auto;
+  font-family: "Trebuchet MS", monospace;
+}
+
+div{
+  padding:5px;
+}
+
+  
