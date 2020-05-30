@@ -301,7 +301,9 @@ class UserProfileInfo(models.Model):
     default='HDB')
 
     def __str__(self):
-        return self.user.username
+        return f'{self.user.username} Profile'
+
+
 
 
 # @receiver(post_save, sender=User)

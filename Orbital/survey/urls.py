@@ -1,7 +1,8 @@
 from django.urls import path
 from django.contrib import admin
 from django.conf.urls import url
-from . import views
+from survey import views as survey_views
+from accounts import views as accounts_views
 
 app_name = 'survey'
 
@@ -12,4 +13,8 @@ app_name = 'survey'
 # ]
 
 urlpatterns=[
+    path('dashboard/', survey_views.dashboard_view, name='dashboard'),
+    path('survey/', survey_views.survey_view, name='survey'),
+    path('rewards/', survey_views.rewards_view, name='rewards')
+    
 ]

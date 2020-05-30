@@ -18,6 +18,9 @@ from django.urls import path
 from django.conf.urls import url,include
 from accounts import views as accounts_views
 from survey import views as survey_views
+from django.conf import settings
+from django.conf.urls.static import static 
+
 
 # urlpatterns = [
 #     path('accounts/', include('accounts.urls')),
@@ -30,5 +33,9 @@ urlpatterns = [
     url(r'^$',accounts_views.index,name='index'),
     url(r'^special/',accounts_views.special,name='special'),
     url(r'^accounts/',include('accounts.urls')),
+    url(r'^accounts/profile/',accounts_views.profile_view, name='profile'),
     url(r'^logout/$', accounts_views.user_logout, name='logout'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

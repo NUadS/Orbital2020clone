@@ -2,12 +2,13 @@
 {% load static %}
 
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{% static 'accounts/accounts.css' %}"><link rel="stylesheet" type="text/css" href="{% static 'survey/index.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'accounts/accounts.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'survey/index.css' %}">
 {% endblock %}
 
 {% load crispy_forms_tags %}
 
-{% block body_block %}
+{% block body_block %} 
 <div id="registration-box" class="box">
       {% if registered %}
         <h1>You have successfully created your account. Thank you for registering!</h1>

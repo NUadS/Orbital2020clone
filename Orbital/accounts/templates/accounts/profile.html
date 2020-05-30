@@ -1,0 +1,124 @@
+{% extends "survey/base.html" %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'accounts/profile.css' %}">
+
+
+{% endblock %}
+
+{% block body_block %}
+<div class="profile_box">
+<div class="uh-image">
+    <img class="uh-image-inner" src="{{user.userprofileinfo.profile_pic.url}}">
+
+</div>
+<div class="profile_header">
+    <h2> {{ user.username }}</h2>
+</div>
+
+<div class="container">
+    <form enctype="multipart/form-data" method="POST" action="{% url 'accounts:profile' %}" id="profileupdate_form" class="form-login">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-md-6 mb-0">
+                <label for="username" class="login__label"> Username</label> 
+                {{user_form.username}}
+            </div>
+
+            <div class="form-group col-md-6 mb-0">
+                <label for="email" class="login__label"> Email </label>
+                {{ profile_form.email}}
+            </div>
+
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-12 mb-0">
+                <label for="dob"  class="login__label"> Date of Birth </label>
+                {{ profile_form.dob}}
+                <div class="help_text">
+                {{profile_form.dob.help_text}}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-5 mb-0">
+                <label for="nationality" class="login__label"> Nationality </label>
+                {{ profile_form.nationality}}
+            </div>
+
+            <div class="form-group col-md-2 mb-0">
+                <label for="age" class="login__label"> Age </label>
+                {{ profile_form.age}}
+            </div>
+
+            <div class="form-group col-md-2 mb-0">
+                <label for="gender" class="login__label"> Gender </label>
+                {{ profile_form.gender}}
+            </div>
+
+            <div class="form-group col-md-3 mb-0">
+                <label for="currentresidentialtype" class="login__label"> Residential Type </label>
+                {{ profile_form.currentresidentialtype}}
+            </div>
+
+        </div>
+
+
+
+        <div class="form-row">
+            <div class="form-group col-md-6 mb-0">
+                <label for="matriculationNumber" class="login__label"> Matric Number </label>
+                {{ profile_form.matriculationNumber}}
+                <div class="help_text">
+                {{profile_form.matriculationNumber.help_text}}
+                </div>
+            </div>
+
+            <div class="form-group col-md-3 mb-0">
+                <label for="year_in_school" class="login__label"> Year in School </label>
+                {{ profile_form.year_in_school}}
+            </div>
+
+            <div class="form-group col-md-3 mb-0">
+                <label for="faculty" class="login__label"> Faculty </label>
+                {{ profile_form.faculty}}
+            </div>
+
+            <div class="form-group col-md-12 mb-0">
+                <label for="degree" class="login__label"> Degree </label>
+                {{ profile_form.degree }}
+            </div>
+
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-12 mb-0">
+                <label for="profile_pic" class="login__label" id="pic"> Profile Picture</label>
+                <div class="pic_text">
+                {{ profile_form.profile_pic}}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-12 mb-0">
+                <div class="box">
+                    <a href="#" onclick= "document.getElementById('profileupdate_form').submit()" id="update-button">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        Update
+                    </a>
+                </div>
+            </div>
+        </div>
+          
+          
+	</form>
+	
+</div>
+
+{% endblock %}
