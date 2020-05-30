@@ -15,6 +15,8 @@ app_name = 'survey'
 urlpatterns=[
     path('dashboard/', survey_views.dashboard_view, name='dashboard'),
     path('survey/', survey_views.survey_view, name='survey'),
+    path('uploadsurvey/', survey_views.uploadsurvey_view, name='uploadsurvey'),
+    path('tracksurvey/', survey_views.tracksurvey_view, name='tracksurvey'),
     path('rewards/', survey_views.rewards_view, name='rewards')
-    
+
 ]

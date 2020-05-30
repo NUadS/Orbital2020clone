@@ -1,11 +1,25 @@
 {% extends "survey/base.html" %}
 {% load static %}
 {% block css %}
-
+<link rel="stylesheet" type="text/css" href="{% static 'survey/survey.css' %}">
 {% endblock %}
 
 {% block body_block %}
 
-<h1> This is the survey page </h1>
+<div id="survey">
+
+        <div class="sign">
+          <span class="flicker">SURVEY</span>
+          <br></br>
+          SECTION
+        </div>
+
+        <div class="btns">
+          <a class="btn" href="{% url 'survey:uploadsurvey' %}" role="button">Upload Survey</a>
+          <a class="btn" href="{% url 'survey:tracksurvey' %}" role="button">Track Surveys</a>
+        </div>
+
+
+</div>
 
 {% endblock %}
