@@ -4,7 +4,7 @@ Proposed Level of Achievement: Gemini (Intermediate)
 
 Problem Motivation: Currently, there is a lack of a common platform for survey conductors to publicise their surveys to the NUS community. As such, many students often take to various social media platforms such as Telegram, Instagram etc. to call for respondents. However, requests for survey respondents through such means are usually ignored as respondents do not see any form of benefits. Furthermore, the constant influx of messages and posts on social media platforms means that such surveys are usually neglected.
 
-Aim: The aim of this project is to create a one-stop, comprehensive platform (mobile application/website) where survey conductors can conveniently source for survey respondents and also to create incentives for the NUS community to participate in surveys. By resolving the lack of response motivation and lack of survey outreach, survey conductors can obtain a higher diversity/quantity/quality of responses and survey respondents can unlock attractive benefits while offering help through sharing their opinions.
+Aim: The aim of this project is to create a one-stop, comprehensive platform (website) where survey conductors can conveniently source for survey respondents and also to create incentives for the NUS community to participate in surveys. By resolving the lack of response motivation and lack of survey outreach, survey conductors can obtain a higher diversity/quantity/quality of responses and survey respondents can unlock attractive benefits while offering help through sharing their opinions.
 
 Proposed Core Features:
 1. Index, Login, Logout
@@ -19,8 +19,8 @@ Proposed Core Features:
 4. User Profile Page 
 - Allow user to edit personal information
 
-5. Survey Creation and Posting
- - Post a survey link which redirects users to the respective survey form (on Google forms)
+5. Surveys - Uploading and Details
+ - Post a survey link which redirects users to the respective survey form (on external sites eg Google forms)
 - Selection of target users attributes --> survey will only be pushed to users with such attributes
 - Upon posting of survey link on database, eligible users will receive a notification and the survey link will be reflected on the ‘survey page’ of such users
 
@@ -32,7 +32,7 @@ Proposed Core Features:
 7. Reward System
 - Points should be awarded to users after completion of each survey. 
 - Points can be exchanged for vouchers (Points should be deducted after they receive the voucher)
-- Users should be able to view how many points they have/the vouchers they have. 
+- Users should be able to view how many points and vouchers they have. 
 
 8. Report function
 - To prevent misuse of application
@@ -75,8 +75,7 @@ Development Plan (Views):
 --> Non-existing users: link to Registration page
 
 - Logout 
---> When users logout from the dashboard, logout page should indicate that they have logged out. 
---> Should include a login button which redirects to login page for logged out users to log in again
+--> When users logout from the dashboard, they will be redirected to the index page.
 
 - Registration 
 --> Users are to fill up mandatory fields to create their profile
