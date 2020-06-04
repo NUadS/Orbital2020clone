@@ -3,8 +3,10 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .forms import UploadSurveyForm
+from .models import UploadSurvey
 from django.contrib import messages
-
+from django.contrib.auth.models import User
+from datetime import datetime
 
 @login_required
 def dashboard_view(request):
@@ -18,13 +20,15 @@ def rewards_view(request):
 def survey_view(request):
     return render(request, 'survey/survey.html')
 
-
+@login_required
 def uploadsurvey_view(request):
     if request.method == 'POST':
         uploadsurvey_form = UploadSurveyForm(request.POST)
         if uploadsurvey_form.is_valid():
-            uploadsurvey_form.save()
-            messages.add_message(request, messages.SUCCESS, 'Your survey was updated successfully!')
+            USform = uploadsurvey_form.save(commit=False)
+            USform.user = request.user
+            USform.save()
+            messages.success(request, 'Your survey is successfully uploaded!')
             return render(request,'survey/survey.html')
     else:
         uploadsurvey_form = UploadSurveyForm()
