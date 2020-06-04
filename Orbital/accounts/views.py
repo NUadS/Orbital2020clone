@@ -1,4 +1,3 @@
-
 from .models import UserProfileInfo
 from django.shortcuts import render,redirect
 from accounts.forms import UserForm,UserProfileInfoForm,UserUpdateForm, ProfileUpdateForm
@@ -7,7 +6,6 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
 
 def index(request):
     if request.user.is_authenticated:
@@ -22,7 +20,7 @@ def special(request):
 @login_required
 def user_logout(request):
     logout(request)
-    return HttpResponseRedirect(reverse('index'))
+    return redirect('index')
 
 @login_required
 def profile_view(request):
@@ -33,6 +31,7 @@ def profile_view(request):
         if user_form.is_valid and profile_form.is_valid:
             user_form.save()
             profile_form.save()
+            messages.success(request, 'Your profile is successfully updated!')
             return redirect('profile')
 
     else:
@@ -57,6 +56,8 @@ def register(request):
                 profile.profile_pic = request.FILES['profile_pic']
             profile.save()
             registered = True
+            return redirect('index')
+
         else:
             print(user_form.errors,profile_form.errors)
     else:
@@ -68,7 +69,7 @@ def register(request):
                            'registered':registered})
 
 
-                           
+
 def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -87,5 +88,3 @@ def user_login(request):
             return HttpResponse("Invalid login details given")
     else:
         return render(request, 'accounts/login.html', {})
-
-
