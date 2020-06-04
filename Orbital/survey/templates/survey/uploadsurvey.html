@@ -1,29 +1,47 @@
 {% extends "survey/base.html" %}
 {% load static %}
 {% block css %}
-<!-- link to uploadsurvey.css -->
+<link rel="stylesheet" type="text/css" href="{% static 'accounts/profile.css'%}">
+<link rel="stylesheet" type="text/css" href="{% static 'survey/uploadsurvey.css'%}"> 
+
 {% endblock %}
 
 {% block body_block %}
 {% load widget_tweaks %}
+<div class=survey_header>
+  <h1> Create a survey </h1>
+</div>
 <div id="uploadsurvey-box" class="box">
   <form method="POST" action="{% url 'survey:survey' %}" id="uploadsurvey_form">
     {% csrf_token %}
-    {% for field in uploadsurvey_form.visible_fields %}
-      <div class="form-group">
-        {{ field.label_tag }}
-        {% render_field field class="form-control" %}
-        {% if field.help_text %}
-          <small class="form-text text-muted">{{ field.help_text }}</small>
-        {% endif %}
-      </div>
-    {% endfor %}
+      <div>
+        <label for="surveytitle" class="login__label"> Survey Title </label> 
+        {{uploadsurvey_form.surveytitle}}
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+        <label for="surveylink" class="login__label"> Survey Link </label>
+        {{uploadsurvey_form.surveylink}}
+
+        <label for="surveydescription" class="login__label"> Survey Description </label>
+        {{uploadsurvey_form.surveydescription}}
+
+        <label for="surveytype" class="login__label"> Survey Type </label>
+        {{uploadsurvey_form.surveytype}}
+
+
+      </div>
+
+      <div class="box submit-button">
+        <a href="#" onclick= "document.getElementById('uploadsurvey_form').submit()" id="update-button">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Submit
+        </a>
+    </div>
+    
   </form>
 </div>
-
-
 
 
 {% endblock %}
