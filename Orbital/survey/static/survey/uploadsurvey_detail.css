@@ -1,0 +1,77 @@
+.detail-box{
+    width: 450px;
+    height: 400px;
+    margin-left: 500px; 
+    margin-top:50px;
+    border: 1px solid white;  
+    border-radius: 10px;
+}
+h1{
+    color:white;
+    text-align:center;
+}
+.utility-list {
+ list-style-type: none;
+  font-size:12px;  
+ margin-left:30px; 
+  
+}
+.utility-list li {
+    margin: 5px -10px 5px 0; /*To change spacing between utilities*/
+    padding: 0 20px 0 30px;
+    display: inline-block;
+    color: #dce3e7;
+  font-family: 'Roboto', sans-serif;
+  
+}
+.utility-list li.user {
+    margin-left:-20px;
+    
+}
+.utility-list li.date {
+   margin-left:-20px; 
+}
+.utility-list li.tags {
+   margin-left:-20px; 
+}
+
+.surveylinkbutton {
+    color: white;
+    font-size: 1.15rem;
+    width: 100%;
+    padding: .5rem 1rem;
+    border: 2px solid transparent;
+    outline: none;
+    border-radius: 1.5rem;
+    background-color: rgba(255, 255, 255, 0.25);
+    letter-spacing: 1px;
+  }
+  
+  .surveylinkbutton:hover,
+  .surveylinkbutton:focus{
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    background-color: transparent;
+  }
+  
+
+  #edit-button{
+    position: absolute;
+    margin-top:70px;
+    margin-left: -150px;
+    
+  }
+
+  #delete-button{
+    position: absolute;
+    margin-top:70px;
+    margin-left: 30px;
+    
+  }
+
+  .back{
+      position: relative;
+      top:-250px;
+      left:10px;
+      font-size: 12px;
+  }

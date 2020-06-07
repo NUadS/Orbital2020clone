@@ -26,6 +26,7 @@ class UserProfileInfoForm(forms.ModelForm):
             'gender':forms.Select(attrs={'style':'width:140px'}),
             'year_in_school':forms.Select(attrs={'style':'width:140px'})
         }
+        
 
 class UserUpdateForm(forms.ModelForm):
     class Meta():

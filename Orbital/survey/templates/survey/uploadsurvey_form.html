@@ -1,0 +1,59 @@
+{% extends "survey/base.html" %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'accounts/profile.css'%}">
+<link rel="stylesheet" type="text/css" href="{% static 'survey/uploadsurvey.css'%}"> 
+
+{% endblock %}
+
+{% block body_block %}
+{% load widget_tweaks %}
+
+<div id="uploadsurvey-box" class="box">
+  <h1 class=survey_header>
+    Your Survey
+  </h1>
+  
+  <form method="POST" id="uploadsurvey_form">
+    {% csrf_token %}
+      <div class=form-row>
+        <label for="surveytitle" class="login__label"> Survey Title </label> 
+        {{form.surveytitle}}
+      </div>
+
+      <div class=form-row>
+
+        <label for="surveylink" class="login__label"> Survey Link </label>
+        {{form.surveylink}}
+
+      </div>
+
+      <div class=form-row>
+
+        <label for="surveydescription" class="login__label"> Survey Description </label>
+        {{form.surveydescription}}
+
+      </div>
+
+
+      <div class=form-row>
+
+        <label for="surveycategory" class="login__label"> Survey Category </label>
+        {{form.surveycategory}}
+      </div>
+
+      <div class="box submit-button">
+        <a href="#" onclick= "document.getElementById('uploadsurvey_form').submit()" id="update-button">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Submit
+        </a>
+    </div>
+    
+  </form>
+</div>
+
+
+{% endblock %}

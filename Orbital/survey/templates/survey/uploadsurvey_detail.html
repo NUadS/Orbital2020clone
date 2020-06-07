@@ -1,0 +1,71 @@
+{% extends "survey/base.html" %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'survey/uploadsurvey_detail.css'%}">
+<link rel="stylesheet" type="text/css" href="{% static 'survey/uploadsurvey.css'%}">
+<link rel="stylesheet" type="text/css" href="{% static 'accounts/profile.css'%}">
+{% endblock %}
+
+{% block body_block %}
+{% load widget_tweaks %}
+<div class=detail-box>
+<h1> {{object.surveytitle}} </h1>
+<div>
+    <ul class="utility-list">
+      <span class="glyphicon glyphicon-user" aria-hidden="true" style="color:white"> </span>
+      <li class="user">{{object.user}}</li>
+      <span class="glyphicon glyphicon-time" aria-hidden="true" style="color:white"> </span>
+      <li class="date">{{object.uploadDate}}</li>
+      <span class="glyphicon glyphicon-tags" aria-hidden="true" style="color:white"> </span>
+      <li class="tags">{{object.surveycategory}}</li>
+    </ul>
+</div>
+
+  <div class=form-row>
+
+    <label for="surveylink" class="login__label"> Survey Link </label>
+    <div class="surveylinkbutton">
+    {{object.surveylink}}
+    </div>
+
+  </div>
+
+  <div class=form-row>
+
+    <label for="surveydescription" class="login__label"> Survey Description </label>
+    
+    <div class="surveylinkbutton">
+        {{object.surveydescription}}
+    </div>
+
+  </div>
+
+
+  <!-- Add target audience stuff here -->
+  <div class="box">
+    <a href="{% url 'survey:updatesurvey' object.id %}" id="edit-button">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Edit 
+    </a>
+</div>
+
+<div class="box">
+    <a href="{% url 'survey:deletesurvey' object.id %}" id="delete-button"> 
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Delete 
+    </a>
+</div>
+
+<div class="back">
+    <a href="{% url 'survey:tracksurvey' %}"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true" style="color:white"> </span></a>
+</div>
+
+</div>
+
+{% endblock %}

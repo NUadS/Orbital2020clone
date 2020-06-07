@@ -1,0 +1,15 @@
+h1{
+    color:white;
+    text-align: center; 
+}
+
+#delete-button{
+    position: absolute;
+    margin-top:70px;
+    margin-left: -150px;
+}
+#cancel-button{
+    position: absolute;
+    margin-top:70px;
+    margin-left: 0px;
+}

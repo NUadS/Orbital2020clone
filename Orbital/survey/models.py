@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.urls import reverse
 # Create your models here.
 
 class UploadSurvey(models.Model):
@@ -12,6 +13,7 @@ class UploadSurvey(models.Model):
     surveydescription = models.CharField('Survey Description',
         max_length=5000,
         help_text="Include your survey dscription here!")
+
     surveycategory_choices = [
     ('EDN','Education'),
     ('HTC','Healthcare'),
@@ -22,3 +24,7 @@ class UploadSurvey(models.Model):
 
     def __str__(self):
         return self.surveytitle
+
+    def get_absolute_url(self):
+        return reverse('survey:tracksurvey-detail', kwargs={'pk':self.pk})
+        
