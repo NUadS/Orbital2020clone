@@ -8,8 +8,10 @@ class UploadSurveyForm(forms.ModelForm):
         model = UploadSurvey
         fields = ('surveytitle','surveylink','surveydescription','surveycategory')
         widgets={
-            'surveytitle': forms.TextInput(attrs={'style': 'width:500px'}),
-            'surveylink': forms.TextInput(attrs={'style':'width:500px'}),
-            'surveydescription':forms.Textarea(attrs={'style':'width:500px'}),
-            'surveycategory':forms.Select(attrs={'style':'width:500px'}),
+            'surveytitle': forms.TextInput(attrs={'type':'text', 'id':'login-input-user', 'class':'login__input'}),
+            'surveylink': forms.TextInput(attrs={'type':'text', 'id':'login-input-user', 'class':'login__input'}),
+            'surveydescription':forms.Textarea(attrs={'type':'text', 'id':'login-input-user', 'class':'login__input'}),
+            'surveycategory':forms.Select(attrs={'id':'login-input-user', 'class':'login__input','style': 'width:430px'}),
         }
+
+

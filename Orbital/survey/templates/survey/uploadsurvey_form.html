@@ -8,26 +8,38 @@
 
 {% block body_block %}
 {% load widget_tweaks %}
-<div class=survey_header>
-  <h1> Create a survey </h1>
-</div>
+
 <div id="uploadsurvey-box" class="box">
-  <form method="POST" action="{% url 'survey:survey' %}" id="uploadsurvey_form">
+  <h1 class=survey_header>
+    Your Survey
+  </h1>
+  
+  <form method="POST" id="uploadsurvey_form">
     {% csrf_token %}
-      <div>
+      <div class=form-row>
         <label for="surveytitle" class="login__label"> Survey Title </label> 
-        {{uploadsurvey_form.surveytitle}}
+        {{form.surveytitle}}
+      </div>
+
+      <div class=form-row>
 
         <label for="surveylink" class="login__label"> Survey Link </label>
-        {{uploadsurvey_form.surveylink}}
+        {{form.surveylink}}
+
+      </div>
+
+      <div class=form-row>
 
         <label for="surveydescription" class="login__label"> Survey Description </label>
-        {{uploadsurvey_form.surveydescription}}
+        {{form.surveydescription}}
 
-        <label for="surveytype" class="login__label"> Survey Type </label>
-        {{uploadsurvey_form.surveytype}}
+      </div>
 
 
+      <div class=form-row>
+
+        <label for="surveycategory" class="login__label"> Survey Category </label>
+        {{form.surveycategory}}
       </div>
 
       <div class="box submit-button">

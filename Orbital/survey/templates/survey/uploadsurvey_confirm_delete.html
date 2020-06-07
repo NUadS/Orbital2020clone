@@ -1,0 +1,47 @@
+{% extends "survey/base.html" %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'accounts/profile.css'%}">
+<link rel="stylesheet" type="text/css" href="{% static 'survey/delete.css'%}"> 
+
+{% endblock %}
+
+{% block body_block %}
+{% load widget_tweaks %}
+
+<div id="uploadsurvey-box" class="box">
+  <h1 class=survey_header>
+    Delete Post
+  </h1>
+  
+  <form method="POST" id="deletesurvey_form">
+    {% csrf_token %}
+    <h2> Are you sure you want to delete the survey {{ object.surveytitle }}?</h2>
+
+      <div class="box">
+        <a href="#" onclick= "document.getElementById('deletesurvey_form').submit()" id="delete-button">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Delete
+        </a>
+    </div>
+
+    <div class="box">
+      <a href="{% url 'survey:tracksurvey-detail' object.id %}" id="cancel-button">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          Cancel
+      </a>
+  </div>
+
+
+    
+  </form>
+</div>
+
+
+{% endblock %}

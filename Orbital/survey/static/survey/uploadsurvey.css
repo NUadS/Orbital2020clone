@@ -1,9 +1,10 @@
 .submit-button{
     margin-top:350px;
-    margin-left: -660px;
+    margin-left: -630px;
 }
 
 .survey_header{
     color: white;
-    font-weight: 100px;
-    margin-left:580px;
+    margin-left: 100px;  
+    margin-bottom:50px;  
+}

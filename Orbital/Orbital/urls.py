@@ -35,6 +35,7 @@ urlpatterns = [
     url(r'^accounts/',include('accounts.urls')),
     url(r'^accounts/profile/',accounts_views.profile_view, name='profile'),
     url(r'^logout/$', accounts_views.user_logout, name='logout'),
+    
 ]
 
 if settings.DEBUG:
