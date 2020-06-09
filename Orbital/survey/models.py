@@ -7,6 +7,7 @@ from django.urls import reverse
 
 class UploadSurvey(models.Model):
     user = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL,blank=True)
+    #creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     uploadDate = models.DateField(default=timezone.now)
     surveytitle = models.CharField('Survey Title', max_length=100)
     surveylink = models.URLField('Survey Link', max_length=200)
@@ -27,4 +28,3 @@ class UploadSurvey(models.Model):
 
     def get_absolute_url(self):
         return reverse('survey:tracksurvey-detail', kwargs={'pk':self.pk})
-        

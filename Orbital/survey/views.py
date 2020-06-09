@@ -27,23 +27,15 @@ def survey_view(request):
 
 
 
-@login_required
-def tracksurvey_view(request):
-    context = {
-        'surveys': UploadSurvey.objects.all()
-    }
-    return render(request, 'survey/tracksurvey.html')
-
-
-class SurveyListView(LoginRequiredMixin,ListView):
+### VIEWS FOR UPLOADSURVEY
+class SurveyCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model=UploadSurvey
-    template_name = 'survey/tracksurvey.html'
-    context_object_name= 'surveys'
-    ordering=['-uploadDate']
+    form_class = UploadSurveyForm
+    success_message = "Your survey was created successfully"
+    def form_valid(self, form):
+        form.instance.user=self.request.user
+        return super().form_valid(form)
 
-class SurveyDetailView(DetailView):
-    model=UploadSurvey
-    
 class SurveyDeleteView(LoginRequiredMixin,UserPassesTestMixin, SuccessMessageMixin, DeleteView):
     model=UploadSurvey
     success_message = "Your survey was successfully deleted!"
@@ -71,16 +63,19 @@ class SurveyUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMi
         return False
 
 
-class SurveyCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+### VIEWS FOR TRACKSURVEY
+@login_required
+def tracksurvey_view(request):
+    context = {
+        'displayedsurveys': UploadSurvey.objects.filter(user=request.user)
+    }
+    return render(request, 'survey/tracksurvey.html', context)
+
+class SurveyListView(LoginRequiredMixin,ListView):
     model=UploadSurvey
-    form_class = UploadSurveyForm
-    success_message = "Your survey was created successfully"
-    def form_valid(self, form):
-        form.instance.user=self.request.user
-        return super().form_valid(form)
+    template_name = 'survey/tracksurvey.html'
+    context_object_name= 'allsurveys'
+    ordering=['-uploadDate']
 
-    
-
-
- 
-
+class SurveyDetailView(DetailView):
+    model=UploadSurvey
