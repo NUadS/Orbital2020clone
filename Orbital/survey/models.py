@@ -27,4 +27,4 @@ class UploadSurvey(models.Model):
         return self.surveytitle
 
     def get_absolute_url(self):
-        return reverse('survey:tracksurvey-detail', kwargs={'pk':self.pk})
+        return reverse('survey:createdsurveys-detail', kwargs={'pk':self.pk})

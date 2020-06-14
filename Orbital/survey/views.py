@@ -11,11 +11,9 @@ from django.contrib.auth.models import User
 from datetime import datetime
 from django.views.generic import ListView, DetailView, CreateView,UpdateView, DeleteView
 from django import forms
+from .filters import SurveyFilter
 
 
-@login_required
-def dashboard_view(request):
-    return render(request, 'survey/dashboard.html')
 
 @login_required
 def rewards_view(request):
@@ -39,7 +37,7 @@ class SurveyCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 class SurveyDeleteView(LoginRequiredMixin,UserPassesTestMixin, SuccessMessageMixin, DeleteView):
     model=UploadSurvey
     success_message = "Your survey was successfully deleted!"
-    success_url='/tracksurvey/'
+    success_url='/createdsurveys/'
 
     def test_func(self):
         survey=self.get_object()
@@ -63,19 +61,28 @@ class SurveyUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMi
         return False
 
 
-### VIEWS FOR TRACKSURVEY
+### VIEWS FOR CREATEDSURVEY
 @login_required
-def tracksurvey_view(request):
+def createdsurveys_view(request):
     context = {
-        'displayedsurveys': UploadSurvey.objects.filter(user=request.user)
+        'createdsurveys': UploadSurvey.objects.filter(user=request.user)
     }
-    return render(request, 'survey/tracksurvey.html', context)
+    return render(request, 'survey/createdsurveys.html', context)
 
 class SurveyListView(LoginRequiredMixin,ListView):
     model=UploadSurvey
-    template_name = 'survey/tracksurvey.html'
+    template_name = 'survey/createdsurvey.html'
     context_object_name= 'allsurveys'
     ordering=['-uploadDate']
 
 class SurveyDetailView(DetailView):
     model=UploadSurvey
+
+
+### VIEWS FOR DASHBOARDFILTER
+@login_required
+def dashboard_view(request):
+    survey_filter = SurveyFilter(request.GET, queryset=UploadSurvey.objects.all())
+    return render(request, 'survey/dashboard.html', {'dashboardfilter':survey_filter})
+
+### VIEWS FOR COMPLETEDSURVEYS
