@@ -43,9 +43,14 @@
         </div>
 
         <div class="form-row">
-            <div class="form-group col-md-5 mb-0">
+            <div class="form-group col-md-4 mb-0">
                 <label for="nationality" class="login__label"> Nationality </label>
                 {{ profile_form.nationality}}
+            </div>
+
+            <div class="form-group col-md-2 mb-0">
+                <label for="singaporean" class="login__label"> Singaporean? </label>
+                {{profile_form.singaporean}}
             </div>
 
             <div class="form-group col-md-2 mb-0">
@@ -58,7 +63,7 @@
                 {{ profile_form.gender}}
             </div>
 
-            <div class="form-group col-md-3 mb-0">
+            <div class="form-group col-md-2 mb-0">
                 <label for="currentresidentialtype" class="login__label"> Residential Type </label>
                 {{ profile_form.currentresidentialtype}}
             </div>

@@ -15,7 +15,17 @@ from django import forms
 
 @login_required
 def dashboard_view(request):
-    return render(request, 'survey/dashboard.html')
+    profile=request.user.userprofileinfo
+    context={
+        'displayedsurveys':UploadSurvey.objects.filter(
+            gender_filter__gender_filter=profile.gender, 
+            year_filter__year_filter=profile.year_in_school, 
+            faculty_filter__faculty_filter=profile.faculty, 
+            singaporean_filter__singaporean_filter=profile.singaporean,
+            residential_filter__residential_filter=profile.currentresidentialtype
+        )
+    }
+    return render(request, 'survey/dashboard.html',context)
 
 @login_required
 def rewards_view(request):
@@ -79,3 +89,6 @@ class SurveyListView(LoginRequiredMixin,ListView):
 
 class SurveyDetailView(DetailView):
     model=UploadSurvey
+
+
+
