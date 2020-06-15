@@ -1,11 +1,22 @@
 {% extends "survey/base.html" %}
 {% load static %}
+<!-- dashboard.css -->
 {% block css %}
-<!-- to link dashboard.css -->
+
 {% endblock %}
-
+{% load widget_tweaks %}
 {% block body_block %}
+<h1>Filter Surveys</h1>
+  <form method="get">
+    {{ dashboardfilter.form.as_p }}
+    <button type="submit">Search</button>
+  </form>
 
-<!-- <h2>Hello {{ user.username }}</h2> -->
+  <ul>
+  {% for survey in dashboardfilter.qs %}
+    <li>{{ survey.surveytitle }} - {{ survey.surveylink }}</li>
+  {% endfor %}
+  </ul>
+
 
 {% endblock %}
