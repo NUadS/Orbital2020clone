@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect, HttpResponse
@@ -86,3 +86,16 @@ def dashboard_view(request):
     return render(request, 'survey/dashboard.html', {'dashboardfilter':survey_filter})
 
 ### VIEWS FOR COMPLETEDSURVEYS
+def completedsurveys_update(request, pk):
+    survey = get_object_or_404(UploadSurvey, pk=pk)
+    survey.is_completed = 'completed'
+    survey.save(update_fields=['is_completed'])
+    messages.success(request, 'Survey {} {} successfully'.format(pk, survey.is_completed))
+    return redirect('dashboard')
+
+
+def completedsurveys_view(request):
+    context = {
+        'completedsurveys': UploadSurvey.objects.filter(user=request.user, is_completed='completed')
+    }
+    return render(request, 'survey/completedsurveys.html', context)

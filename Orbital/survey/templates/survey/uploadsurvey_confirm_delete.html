@@ -2,7 +2,7 @@
 {% load static %}
 {% block css %}
 <link rel="stylesheet" type="text/css" href="{% static 'accounts/profile.css'%}">
-<link rel="stylesheet" type="text/css" href="{% static 'survey/delete.css'%}"> 
+<link rel="stylesheet" type="text/css" href="{% static 'survey/delete.css'%}">
 
 {% endblock %}
 
@@ -13,7 +13,7 @@
   <h1 class=survey_header>
     Delete Post
   </h1>
-  
+
   <form method="POST" id="deletesurvey_form">
     {% csrf_token %}
     <h2> Are you sure you want to delete the survey {{ object.surveytitle }}?</h2>
@@ -29,7 +29,7 @@
     </div>
 
     <div class="box">
-      <a href="{% url 'survey:tracksurvey-detail' object.id %}" id="cancel-button">
+      <a href="{% url 'survey:createdsurveys-detail' object.id %}" id="cancel-button">
           <span></span>
           <span></span>
           <span></span>
@@ -39,7 +39,7 @@
   </div>
 
 
-    
+
   </form>
 </div>
 

@@ -23,6 +23,15 @@ class UploadSurvey(models.Model):
     ('OTH','Others')]
     surveycategory = models.CharField('Survey Category',choices=surveycategory_choices, max_length=100, default='OTH')
 
+
+    COMPLETEDCHOICES = (
+        ('completed', 'Completed'),
+        ('uncompleted', 'Uncompleted'),
+    )
+    is_completed = models.CharField(max_length=12, choices=COMPLETEDCHOICES, default = "uncompleted")
+    # is_completed = models.BooleanField(default=False)
+
+
     def __str__(self):
         return self.surveytitle
 
