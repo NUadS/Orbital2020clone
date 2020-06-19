@@ -9,8 +9,15 @@
 
 <div class="main">
     <h1> Available Surveys </h1>
+    <!-- Search form to filter for certain survey categories-->
+    <form method="get">
+      {{ dashboardfilter.form.as_p }}
+      <button type="submit">Search</button>
+    </form>
+
     <ul class="cards">
         {% for survey in displayedsurveys %}
+        {% for survey in dashboardfilter.qs %}
         <li class="cards_item">
 
         <div class="blog-card">
@@ -48,6 +55,7 @@
           </div><!-- /.blog-card -->
 
       </li>
+      {% endfor %}
       {% endfor %}
     </ul>
 

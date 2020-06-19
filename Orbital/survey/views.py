@@ -11,10 +11,12 @@ from django.contrib.auth.models import User
 from datetime import datetime
 from django.views.generic import ListView, DetailView, CreateView,UpdateView, DeleteView
 from django import forms
+from .filters import SurveyFilter
 
 
 @login_required
 def dashboard_view(request):
+    survey_filter= SurveyFilter(request.GET, queryset=UploadSurvey.objects.all())
     profile=request.user.userprofileinfo
     context={
         'displayedsurveys':UploadSurvey.objects.filter(
@@ -23,7 +25,8 @@ def dashboard_view(request):
             faculty_filter__faculty_filter=profile.faculty, 
             singaporean_filter__singaporean_filter=profile.singaporean,
             residential_filter__residential_filter=profile.currentresidentialtype
-        )
+        ),
+        'dashboardfilter': survey_filter
     }
     return render(request, 'survey/dashboard.html',context)
 
