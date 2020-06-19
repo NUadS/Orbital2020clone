@@ -33,7 +33,7 @@
   <div class=form-row>
 
     <label for="surveydescription" class="login__label"> Survey Description </label>
-    
+
     <div class="surveylinkbutton">
         {{object.surveydescription}}
         
@@ -50,22 +50,22 @@
         <span></span>
         <span></span>
         <span></span>
-        Edit 
+        Edit
     </a>
 </div>
 
 <div class="box">
-    <a href="{% url 'survey:deletesurvey' object.id %}" id="delete-button"> 
+    <a href="{% url 'survey:deletesurvey' object.id %}" id="delete-button">
         <span></span>
         <span></span>
         <span></span>
         <span></span>
-        Delete 
+        Delete
     </a>
 </div>
 
 <div class="back">
-    <a href="{% url 'survey:tracksurvey' %}"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true" style="color:white"> </span></a>
+    <a href="{% url 'survey:createdsurveys' %}"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true" style="color:white"> </span></a>
 </div>
 
 </div>

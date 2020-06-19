@@ -15,6 +15,13 @@
       <button type="submit">Search</button>
     </form>
 
+  <ul>
+  {% for survey in dashboardfilter.qs %}
+    <li>{{ survey.surveytitle }} - {{ survey.surveylink }}</li>
+    <a href="{% url 'completedsurveys_update' pk=survey.pk %}" class="uk-button uk-button-default">Update</a>
+  {% endfor %}
+  </ul>
+
     <ul class="cards">
         {% for survey in displayedsurveys %}
         {% for survey in dashboardfilter.qs %}

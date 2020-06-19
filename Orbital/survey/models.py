@@ -59,6 +59,15 @@ class UploadSurvey(models.Model):
     year_filter=models.ManyToManyField(YearFilter,blank=True)
     residential_filter=models.ManyToManyField(ResidentialFilter, blank=True)
 
+
+    COMPLETEDCHOICES = (
+        ('completed', 'Completed'),
+        ('uncompleted', 'Uncompleted'),
+    )
+    is_completed = models.CharField(max_length=12, choices=COMPLETEDCHOICES, default = "uncompleted")
+    # is_completed = models.BooleanField(default=False)
+
+
     def __str__(self):
         return self.surveytitle
 
