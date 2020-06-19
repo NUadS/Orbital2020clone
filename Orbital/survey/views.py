@@ -5,30 +5,16 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .forms import UploadSurveyForm
-from .models import UploadSurvey
+from .models import UploadSurvey, CompletedSurveys
 from django.contrib import messages
 from django.contrib.auth.models import User
 from datetime import datetime
 from django.views.generic import ListView, DetailView, CreateView,UpdateView, DeleteView
 from django import forms
 from .filters import SurveyFilter
+from django.core.exceptions import ObjectDoesNotExist
 
 
-@login_required
-def dashboard_view(request):
-    survey_filter= SurveyFilter(request.GET, queryset=UploadSurvey.objects.all())
-    profile=request.user.userprofileinfo
-    context={
-        'displayedsurveys':UploadSurvey.objects.filter(
-            gender_filter__gender_filter=profile.gender,
-            year_filter__year_filter=profile.year_in_school,
-            faculty_filter__faculty_filter=profile.faculty,
-            singaporean_filter__singaporean_filter=profile.singaporean,
-            residential_filter__residential_filter=profile.currentresidentialtype
-        ),
-        'dashboardfilter': survey_filter
-    }
-    return render(request, 'survey/dashboard.html',context)
 
 @login_required
 def rewards_view(request):
@@ -52,7 +38,7 @@ class SurveyCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 class SurveyDeleteView(LoginRequiredMixin,UserPassesTestMixin, SuccessMessageMixin, DeleteView):
     model=UploadSurvey
     success_message = "Your survey was successfully deleted!"
-    success_url='/tracksurvey/'
+    success_url='/createdsurveys/'
 
     def test_func(self):
         survey=self.get_object()
@@ -76,17 +62,17 @@ class SurveyUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMi
         return False
 
 
-### VIEWS FOR TRACKSURVEY
+### VIEWS FOR createdsurveys
 @login_required
-def tracksurvey_view(request):
+def createdsurveys_view(request):
     context = {
-        'displayedsurveys': UploadSurvey.objects.filter(user=request.user)
+        'createdsurveys': UploadSurvey.objects.filter(user=request.user)
     }
-    return render(request, 'survey/tracksurvey.html', context)
+    return render(request, 'survey/createdsurveys.html', context)
 
 class SurveyListView(LoginRequiredMixin,ListView):
     model=UploadSurvey
-    template_name = 'survey/tracksurvey.html'
+    template_name = 'survey/createdsurveys.html'
     context_object_name= 'allsurveys'
     ordering=['-uploadDate']
 
@@ -97,20 +83,37 @@ class SurveyDetailView(DetailView):
 ### VIEWS FOR DASHBOARDFILTER
 @login_required
 def dashboard_view(request):
-    survey_filter = SurveyFilter(request.GET, queryset=UploadSurvey.objects.all())
-    return render(request, 'survey/dashboard.html', {'dashboardfilter':survey_filter})
+    survey_filter= SurveyFilter(request.GET, queryset=UploadSurvey.objects.all())
+    profile=request.user.userprofileinfo
+    context={
+        'displayedsurveys':UploadSurvey.objects.filter(
+            gender_filter__gender_filter=profile.gender,
+            year_filter__year_filter=profile.year_in_school,
+            faculty_filter__faculty_filter=profile.faculty,
+            singaporean_filter__singaporean_filter=profile.singaporean,
+            residential_filter__residential_filter=profile.currentresidentialtype),
+        'dashboardfilter': survey_filter,
+        'uncompletedsurveys': UploadSurvey.objects.exclude(completedsurveys__isnull=False)
+    }
+    return render(request, 'survey/dashboard.html',context)
 
 ### VIEWS FOR COMPLETEDSURVEYS
-def completedsurveys_update(request, pk):
-    survey = get_object_or_404(UploadSurvey, pk=pk)
-    survey.is_completed = 'completed'
-    survey.save(update_fields=['is_completed'])
-    messages.success(request, 'Survey {} {} successfully'.format(pk, survey.is_completed))
-    return redirect('dashboard')
-
-
 def completedsurveys_view(request):
     context = {
-        'completedsurveys': UploadSurvey.objects.filter(user=request.user, is_completed='completed')
+        'allcompletedsurveys': CompletedSurveys.objects.get(user=request.user)
     }
     return render(request, 'survey/completedsurveys.html', context)
+
+
+### VIEWS FOR NEWLY COMPLETED SURVEY
+def completedsurveys_update(request, pk):
+    try:
+        user_completedsurveys = CompletedSurveys.objects.get(user=request.user)
+    except ObjectDoesNotExist:
+        user_completedsurveys = CompletedSurveys.objects.create(user=request.user)
+        user_completedsurveys.save()
+
+    newsurvey = UploadSurvey.objects.get(pk=pk)
+    user_completedsurveys.completedsurveys.add(newsurvey)
+    messages.success(request, 'Survey {} completed successfully'.format(pk))
+    return redirect('survey:dashboard')

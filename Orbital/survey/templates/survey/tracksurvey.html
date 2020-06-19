@@ -1,8 +1,8 @@
 {% extends "survey/base.html" %}
 {% load static %}
 {% block css %}
-<!-- link to tracksurvey.css -->
-<link rel="stylesheet" type="text/css" href="{% static 'survey/tracksurvey.css'%}">
+<!-- link to createdsurveys.css -->
+<link rel="stylesheet" type="text/css" href="{% static 'survey/createdsurveys.css'%}">
 {% endblock %}
 {% block body_block %}
 {% load widget_tweaks %}
@@ -17,7 +17,7 @@
 
             <div class="title-content">
               <h3>
-                <a href="{% url 'survey:tracksurvey-detail' survey.id %}" style="color:lightblue"> {{survey.surveytitle}} </a>
+                <a href="{% url 'survey:createdsurveys-detail' survey.id %}" style="color:lightblue"> {{survey.surveytitle}} </a>
             </h3>
               <hr />
               <div class="intro">

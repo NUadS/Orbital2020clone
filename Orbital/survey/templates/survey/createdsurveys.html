@@ -4,27 +4,14 @@
 <!-- link to createdsurveys.css -->
 <link rel="stylesheet" type="text/css" href="{% static 'survey/createdsurveys.css'%}">
 {% endblock %}
+
 {% block body_block %}
 {% load widget_tweaks %}
 
 <div class="main">
-    <h1> Available Surveys </h1>
-    <!-- Search form to filter for certain survey categories-->
-    <form method="get">
-      {{ dashboardfilter.form.as_p }}
-      <button type="submit">Search</button>
-    </form>
-
-  <ul>
-  {% for survey in dashboardfilter.qs  %}
-    <li>{{ survey.surveytitle }} - {{ survey.surveylink }}</li>
-    <a href="{% url 'survey:completedsurveys_update' pk=survey.pk %}" class="uk-button uk-button-default">Complete Survey</a>
-  {% endfor %}
-  </ul>
-
+    <h1> Created Surveys </h1>
     <ul class="cards">
-        {% for survey in displayedsurveys %}
-        {% for survey in dashboardfilter.qs %}
+        {% for survey in createdsurveys %}
         <li class="cards_item">
 
         <div class="blog-card">
@@ -63,8 +50,11 @@
 
       </li>
       {% endfor %}
-      {% endfor %}
     </ul>
 
 </div>
-{%endblock%}
+
+
+
+
+{% endblock %}

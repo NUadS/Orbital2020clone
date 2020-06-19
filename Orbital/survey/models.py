@@ -37,6 +37,7 @@ class ResidentialFilter(models.Model):
 
 
 class UploadSurvey(models.Model):
+    # id = models.AutoField(primary_key=True)
     user = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL,blank=True)
     #creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     uploadDate = models.DateField(default=timezone.now)
@@ -59,17 +60,12 @@ class UploadSurvey(models.Model):
     year_filter=models.ManyToManyField(YearFilter,blank=True)
     residential_filter=models.ManyToManyField(ResidentialFilter, blank=True)
 
-
-    COMPLETEDCHOICES = (
-        ('completed', 'Completed'),
-        ('uncompleted', 'Uncompleted'),
-    )
-    is_completed = models.CharField(max_length=12, choices=COMPLETEDCHOICES, default = "uncompleted")
-    # is_completed = models.BooleanField(default=False)
-
-
     def __str__(self):
         return self.surveytitle
 
     def get_absolute_url(self):
-        return reverse('survey:tracksurvey-detail', kwargs={'pk':self.pk})
+        return reverse('survey:createdsurveys-detail', kwargs={'pk':self.pk})
+
+class CompletedSurveys(models.Model):
+    user = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL,blank=True)
+    completedsurveys = models.ManyToManyField(UploadSurvey)
