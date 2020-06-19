@@ -43,13 +43,19 @@
               <label for="nationality"> Nationality </label>
               </div>
             </div>
+            <div class="form-group col-md-3 mb-0">
+              <div class="registration-input-dropdown">
+                {{ profile_form.singaporean}}
+                <label for="singaporean"> Singaporean? </label>
+                </div>
+            </div>
             <div class="form-group col-md-2 mb-0">
               <div class="registration-input">
               {{ profile_form.age}}
               <label for="age"> Age </label>
               </div>
             </div>
-            <div class="form-group col-md-3 mb-0">
+            <div class="form-group col-md-4 mb-0">
               <div class="registration-input">
               {{ profile_form.dob}}
               <label for="dob"> Date of Birth </label>
@@ -75,7 +81,7 @@
 
           <!-- matric in one row  -->
             <div class="form-row user-box">
-            <div class="form-group col-md-12 mb-0">
+            <div class="form-group col-md-6 mb-0">
               <div class="registration-input">
               {{ profile_form.matriculationNumber}}
               <label for="matriculationNumber"> Matric Number </label>
@@ -102,7 +108,7 @@
             </div>
           </div>
 
-            <div class="form-group col-md-7 mb-0">
+            <div class="form-group col-md-9 mb-0">
               <div class="registration-input">
               {{ profile_form.degree}}
               <label for="degree"> Degree </label>

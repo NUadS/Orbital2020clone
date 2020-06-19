@@ -10,6 +10,7 @@
 {% load widget_tweaks %}
 
 <div id="uploadsurvey-box" class="box">
+
   <h1 class=survey_header>
     Your Survey
   </h1>
@@ -42,6 +43,120 @@
         {{form.surveycategory}}
       </div>
 
+      <div class=form-row>
+
+        <label for="gender_filter" class="login__label"> Gender Filter</label>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+        <script>
+        $(document).ready(function(){
+      $("select").change(function(){
+          $(this).find("option:selected").each(function(){
+              var optionValue = $(this).attr("value");
+              if(optionValue){
+                  $(".box1").not("." + optionValue).hide();
+                  $("." + optionValue).show();
+              } else{
+                  $(".box1").hide();
+              }
+          });
+      }).change();
+  });
+        </script>
+
+        <select class="login__input" id='login-input-user'>
+          <option>Filter by Gender?</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+  
+        {% for checkbox in form.gender_filter %}
+        <div class="checkbox yes box1 login__input" id='login-input-user'>
+            <label class="genderfilter">
+                    {{ checkbox.tag }} {{ checkbox.choice_label }}
+            </label>
+        </div>
+        {% endfor %}
+
+      </div>
+
+      <div class=form-row>
+
+        <label for="singaporean_filter" class="login__label"> Singaporean Filter</label>
+        <select class="login__input" id='login-input-user'>
+          <option>Singaporean?</option>
+          <option value="yes2">Yes</option>
+          <option value="no">No</option>
+        </select>
+  
+        {% for checkbox in form.singaporean_filter %}
+        <div class=" yes2 box1 checkbox login__input" id='login-input-user'>
+            <label class="genderfilter">
+                    {{ checkbox.tag }} {{ checkbox.choice_label }}
+            </label>
+        </div>
+        {% endfor %}
+
+      </div>
+
+      <div class=form-row>
+
+        <label for="faculty_filter" class="login__label"> Faculty Filter</label>
+
+        <select class="login__input" id='login-input-user'>
+          <option>Filter by Faculty?</option>
+          <option value="yes3">Yes</option>
+          <option value="no">No</option>
+        </select>
+  
+        {% for checkbox in form.faculty_filter %}
+        <div class="yes3 box1 checkbox login__input" id='login-input-user'>
+            <label class="genderfilter">
+                    {{ checkbox.tag }} {{ checkbox.choice_label }}
+            </label>
+        </div>
+        {% endfor %}
+
+      </div>
+
+      <div class=form-row>
+
+        <label for="year_filter" class="login__label"> Year Filter</label>
+        <select class="login__input" id='login-input-user'>
+          <option>Filter by Year?</option>
+          <option value="yes4">Yes</option>
+          <option value="no">No</option>
+        </select>
+  
+        {% for checkbox in form.year_filter %}
+        <div class="yes4 box1 checkbox login__input" id='login-input-user'>
+            <label class="genderfilter">
+                    {{ checkbox.tag }} {{ checkbox.choice_label }}
+            </label>
+        </div>
+        {% endfor %}
+
+      </div>
+
+      <div class=form-row>
+
+        <label for="residential_filter" class="login__label"> Residential Filter</label>
+        <select class="login__input" id='login-input-user'>
+          <option>Filter by Residential Type?</option>
+          <option value="yes5">Yes</option>
+          <option value="no">No</option>
+        </select>
+  
+        {% for checkbox in form.residential_filter %}
+        <div class="yes5 box1 checkbox login__input" id='login-input-user'>
+            <label class="genderfilter">
+                    {{ checkbox.tag }} {{ checkbox.choice_label }}
+            </label>
+        </div>
+        {% endfor %}
+
+      </div>
+      
+
       <div class="box submit-button">
         <a href="#" onclick= "document.getElementById('uploadsurvey_form').submit()" id="update-button">
             <span></span>
@@ -54,6 +169,7 @@
     
   </form>
 </div>
+
 
 
 {% endblock %}

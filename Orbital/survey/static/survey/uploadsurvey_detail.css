@@ -71,7 +71,7 @@ h1{
 
   .back{
       position: relative;
-      top:-250px;
+      margin-top:-230px;
       left:10px;
       font-size: 12px;
   }
