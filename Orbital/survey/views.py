@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .forms import UploadSurveyForm
-from .models import UploadSurvey, CompletedSurveys
+from .models import UploadSurvey, CompletedSurveys, UserPoints
 from django.contrib import messages
 from django.contrib.auth.models import User
 from datetime import datetime
@@ -13,12 +13,8 @@ from django.views.generic import ListView, DetailView, CreateView,UpdateView, De
 from django import forms
 from .filters import SurveyFilter
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Avg, Sum
 
-
-
-@login_required
-def rewards_view(request):
-    return render(request, 'survey/rewards.html')
 
 @login_required
 def survey_view(request):
@@ -91,9 +87,10 @@ def dashboard_view(request):
             year_filter__year_filter=profile.year_in_school,
             faculty_filter__faculty_filter=profile.faculty,
             singaporean_filter__singaporean_filter=profile.singaporean,
-            residential_filter__residential_filter=profile.currentresidentialtype),
+            residential_filter__residential_filter=profile.currentresidentialtype,
+            # completedsurveys__isnull=True
+            ),
         'dashboardfilter': survey_filter,
-        'uncompletedsurveys': UploadSurvey.objects.exclude(completedsurveys__isnull=False)
     }
     return render(request, 'survey/dashboard.html',context)
 
@@ -115,5 +112,17 @@ def completedsurveys_update(request, pk):
 
     newsurvey = UploadSurvey.objects.get(pk=pk)
     user_completedsurveys.completedsurveys.add(newsurvey)
+
+    earned_points = UserPoints.objects.create(user=request.user)
+
     messages.success(request, 'Survey {} completed successfully'.format(pk))
     return redirect('survey:dashboard')
+
+
+### VIEWS FOR REWARDS
+@login_required
+def rewards_view(request):
+    context={
+        'displayedpoints':UserPoints.objects.filter(user=request.user).aggregate(Sum('points_amount'))
+    }
+    return render(request, 'survey/rewards.html', context)

@@ -69,3 +69,9 @@ class UploadSurvey(models.Model):
 class CompletedSurveys(models.Model):
     user = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL,blank=True)
     completedsurveys = models.ManyToManyField(UploadSurvey)
+
+
+class UserPoints(models.Model):
+    user = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL,blank=True)
+    points_amount = models.IntegerField(default=1)
+    date = models.DateTimeField(auto_now_add=True)
