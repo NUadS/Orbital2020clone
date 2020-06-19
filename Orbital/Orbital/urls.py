@@ -19,7 +19,7 @@ from django.conf.urls import url,include
 from accounts import views as accounts_views
 from survey import views as survey_views
 from django.conf import settings
-from django.conf.urls.static import static 
+from django.conf.urls.static import static
 
 
 # urlpatterns = [
@@ -35,7 +35,8 @@ urlpatterns = [
     url(r'^accounts/',include('accounts.urls')),
     url(r'^accounts/profile/',accounts_views.profile_view, name='profile'),
     url(r'^logout/$', accounts_views.user_logout, name='logout'),
-    
+
+
 ]
 
 if settings.DEBUG:

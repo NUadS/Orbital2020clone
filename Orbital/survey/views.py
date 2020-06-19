@@ -89,6 +89,3 @@ class SurveyListView(LoginRequiredMixin,ListView):
 
 class SurveyDetailView(DetailView):
     model=UploadSurvey
-
-
-
