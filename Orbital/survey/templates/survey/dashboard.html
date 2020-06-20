@@ -3,6 +3,7 @@
 {% block css %}
 <!-- link to tracksurvey.css -->
 <link rel="stylesheet" type="text/css" href="{% static 'survey/tracksurvey.css'%}">
+<link rel="stylesheet" type="text/css" href="{% static 'accounts/profile.css'%}">
 {% endblock %}
 {% block body_block %}
 {% load widget_tweaks %}
@@ -11,12 +12,27 @@
     <h1> Available Surveys </h1>
     <!-- Search form to filter for certain survey categories-->
     <form method="get">
-      {{ dashboardfilter.form.as_p }}
-      <button type="submit">Search</button>
+      <div class="filter-form">
+      <span class="glyphicon glyphicon-filter filter" aria-hidden="true" style="color:white"> Filter: </span>
+      <div>
+      <label for="survey-title" class="login__label"> Survey Title</label>
+      {{dashboardfilter.form.surveytitle}}
+      </div>
+      
+      <div>
+      <label for="survey-cat" class="login__label"> Survey Category</label>
+      {{dashboardfilter.form.surveycategory}}
+      </div>
+
+      <div>
+      <button class='search' type="submit">Search</button>
+      </div>
+      
+    </div>
     </form>
 
     <ul class="cards">
-        {% for survey in displayedsurveys %}
+        
         {% for survey in dashboardfilter.qs %}
         <li class="cards_item">
 
@@ -56,7 +72,7 @@
 
       </li>
       {% endfor %}
-      {% endfor %}
+      
     </ul>
 
 </div>

@@ -16,16 +16,16 @@ from .filters import SurveyFilter
 
 @login_required
 def dashboard_view(request):
-    survey_filter= SurveyFilter(request.GET, queryset=UploadSurvey.objects.all())
     profile=request.user.userprofileinfo
-    context={
-        'displayedsurveys':UploadSurvey.objects.filter(
+    target_filter= UploadSurvey.objects.filter(
             gender_filter__gender_filter=profile.gender, 
             year_filter__year_filter=profile.year_in_school, 
             faculty_filter__faculty_filter=profile.faculty, 
             singaporean_filter__singaporean_filter=profile.singaporean,
             residential_filter__residential_filter=profile.currentresidentialtype
-        ),
+        )
+    survey_filter= SurveyFilter(request.GET, queryset=target_filter)
+    context={
         'dashboardfilter': survey_filter
     }
     return render(request, 'survey/dashboard.html',context)
