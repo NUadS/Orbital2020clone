@@ -8,6 +8,12 @@ class SurveyFilter(django_filters.FilterSet):
     # surveycategory = django_filters.MultipleChoiceFilter(choices=UploadSurvey.objects.filter().only('surveycategory'),
     #     widget=forms.CheckboxSelectMultiple)
 
-    class Meta:
+    class Meta():
         model = UploadSurvey
-        fields = ['surveytitle','surveycategory']
+        fields = ('surveytitle','surveycategory')
+        widgets={
+            'surveytitle': forms.TextInput(attrs={'type':'text', 'id':'login-input-user', 'class':'login__input'}),
+            'surveycategory':forms.Select(attrs={'id':'login-input-user', 'class':'login__input','style': 'width:430px'})
+        }
+
+

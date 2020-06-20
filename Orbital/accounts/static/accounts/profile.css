@@ -53,6 +53,7 @@
     font-size: 16px;
     line-height: 1.25;
     letter-spacing: 1px;
+ 
   }
   
   * {
@@ -71,7 +72,11 @@
     display: block;
     padding-left: 1rem;
   }
-  
+
+  .genderfilter{
+    color: white;
+  }
+
   .login__label,
   .login__label--checkbox {
     color: rgba(255, 255, 255, 0.5);

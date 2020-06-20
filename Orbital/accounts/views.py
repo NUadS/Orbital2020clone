@@ -9,7 +9,7 @@ from django.contrib import messages
 
 def index(request):
     if request.user.is_authenticated:
-        return render(request, 'survey/dashboard.html')
+        return redirect('survey:dashboard')
     else:
         return render(request, 'accounts/index.html')
 
@@ -79,7 +79,7 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request,user)
-                return render(request,'survey/dashboard.html')
+                return redirect('survey:dashboard')
             else:
                 return HttpResponse("Your account was inactive.")
         else:

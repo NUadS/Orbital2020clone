@@ -14,6 +14,21 @@ from django import forms
 from .filters import SurveyFilter
 
 
+@login_required
+def dashboard_view(request):
+    profile=request.user.userprofileinfo
+    target_filter= UploadSurvey.objects.filter(
+            gender_filter__gender_filter=profile.gender, 
+            year_filter__year_filter=profile.year_in_school, 
+            faculty_filter__faculty_filter=profile.faculty, 
+            singaporean_filter__singaporean_filter=profile.singaporean,
+            residential_filter__residential_filter=profile.currentresidentialtype
+        )
+    survey_filter= SurveyFilter(request.GET, queryset=target_filter)
+    context={
+        'dashboardfilter': survey_filter
+    }
+    return render(request, 'survey/dashboard.html',context)
 
 @login_required
 def rewards_view(request):
@@ -37,7 +52,7 @@ class SurveyCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 class SurveyDeleteView(LoginRequiredMixin,UserPassesTestMixin, SuccessMessageMixin, DeleteView):
     model=UploadSurvey
     success_message = "Your survey was successfully deleted!"
-    success_url='/createdsurveys/'
+    success_url='/tracksurvey/'
 
     def test_func(self):
         survey=self.get_object()
@@ -61,28 +76,19 @@ class SurveyUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMi
         return False
 
 
-### VIEWS FOR CREATEDSURVEY
+### VIEWS FOR TRACKSURVEY
 @login_required
-def createdsurveys_view(request):
+def tracksurvey_view(request):
     context = {
-        'createdsurveys': UploadSurvey.objects.filter(user=request.user)
+        'displayedsurveys': UploadSurvey.objects.filter(user=request.user)
     }
-    return render(request, 'survey/createdsurveys.html', context)
+    return render(request, 'survey/tracksurvey.html', context)
 
 class SurveyListView(LoginRequiredMixin,ListView):
     model=UploadSurvey
-    template_name = 'survey/createdsurvey.html'
+    template_name = 'survey/tracksurvey.html'
     context_object_name= 'allsurveys'
     ordering=['-uploadDate']
 
 class SurveyDetailView(DetailView):
     model=UploadSurvey
-
-
-### VIEWS FOR DASHBOARDFILTER
-@login_required
-def dashboard_view(request):
-    survey_filter = SurveyFilter(request.GET, queryset=UploadSurvey.objects.all())
-    return render(request, 'survey/dashboard.html', {'dashboardfilter':survey_filter})
-
-### VIEWS FOR COMPLETEDSURVEYS

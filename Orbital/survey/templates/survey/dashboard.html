@@ -1,22 +1,79 @@
 {% extends "survey/base.html" %}
 {% load static %}
-<!-- dashboard.css -->
 {% block css %}
-
+<!-- link to tracksurvey.css -->
+<link rel="stylesheet" type="text/css" href="{% static 'survey/tracksurvey.css'%}">
+<link rel="stylesheet" type="text/css" href="{% static 'accounts/profile.css'%}">
 {% endblock %}
-{% load widget_tweaks %}
 {% block body_block %}
-<h1>Filter Surveys</h1>
-  <form method="get">
-    {{ dashboardfilter.form.as_p }}
-    <button type="submit">Search</button>
-  </form>
+{% load widget_tweaks %}
 
-  <ul>
-  {% for survey in dashboardfilter.qs %}
-    <li>{{ survey.surveytitle }} - {{ survey.surveylink }}</li>
-  {% endfor %}
-  </ul>
+<div class="main">
+    <h1> Available Surveys </h1>
+    <!-- Search form to filter for certain survey categories-->
+    <form method="get">
+      <div class="filter-form">
+      <span class="glyphicon glyphicon-filter filter" aria-hidden="true" style="color:white"> Filter: </span>
+      <div>
+      <label for="survey-title" class="login__label"> Survey Title</label>
+      {{dashboardfilter.form.surveytitle}}
+      </div>
+      
+      <div>
+      <label for="survey-cat" class="login__label"> Survey Category</label>
+      {{dashboardfilter.form.surveycategory}}
+      </div>
+
+      <div>
+      <button class='search' type="submit">Search</button>
+      </div>
+      
+    </div>
+    </form>
+
+    <ul class="cards">
+        
+        {% for survey in dashboardfilter.qs %}
+        <li class="cards_item">
+
+        <div class="blog-card">
+
+            <div class="title-content">
+              <h3>
+                <a href="{% url 'survey:tracksurvey-detail' survey.id %}" style="color:lightblue"> {{survey.surveytitle}} </a>
+            </h3>
+              <hr />
+              <div class="intro">
+                <a href="{{survey.surveylink}}" class="surveylinkbutton"> {{survey.surveylink}} </a>
+              </div>
+            </div><!-- /.title-content -->
+
+            <div>
+              <ul class="utility-list">
+                <span class="glyphicon glyphicon-user" aria-hidden="true" style="color:white"> </span>
+                <li class="user">{{survey.user}}</li>
+                <span class="glyphicon glyphicon-time" aria-hidden="true" style="color:white"> </span>
+                <li class="date">{{survey.uploadDate}}</li>
+                <span class="glyphicon glyphicon-tags" aria-hidden="true" style="color:white"> </span>
+                <li class="tags">{{survey.surveycategory}}</li>
+              </ul>
+            </div><!-- /.utility-info -->
+
+            <div class="card-info">
+                {{survey.surveydescription}}
+            </div><!-- /.card-info -->
 
 
-{% endblock %}
+            <!-- overlays -->
+
+            <div class="color-overlay"></div>
+
+          </div><!-- /.blog-card -->
+
+      </li>
+      {% endfor %}
+      
+    </ul>
+
+</div>
+{%endblock%}

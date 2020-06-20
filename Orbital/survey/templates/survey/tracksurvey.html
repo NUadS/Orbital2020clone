@@ -1,24 +1,23 @@
 {% extends "survey/base.html" %}
 {% load static %}
 {% block css %}
-<!-- link to createdsurveys.css -->
-<link rel="stylesheet" type="text/css" href="{% static 'survey/createdsurveys.css'%}">
+<!-- link to tracksurvey.css -->
+<link rel="stylesheet" type="text/css" href="{% static 'survey/tracksurvey.css'%}">
 {% endblock %}
-
 {% block body_block %}
 {% load widget_tweaks %}
 
 <div class="main">
-    <h1> Created Surveys </h1>
+    <h1> Track Surveys </h1>
     <ul class="cards">
-        {% for survey in createdsurveys %}
+        {% for survey in displayedsurveys %}
         <li class="cards_item">
 
         <div class="blog-card">
 
             <div class="title-content">
               <h3>
-                <a href="{% url 'survey:createdsurveys-detail' survey.id %}" style="color:lightblue"> {{survey.surveytitle}} </a>
+                <a href="{% url 'survey:tracksurvey-detail' survey.id %}" style="color:lightblue"> {{survey.surveytitle}} </a>
             </h3>
               <hr />
               <div class="intro">
