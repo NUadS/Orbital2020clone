@@ -64,3 +64,27 @@ class UploadSurvey(models.Model):
 
     def get_absolute_url(self):
         return reverse('survey:tracksurvey-detail', kwargs={'pk':self.pk})
+
+
+class CompletedSurveys(models.Model):
+    user = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL,blank=True)
+    completedsurveys = models.ManyToManyField(UploadSurvey)
+
+
+class UserPoints(models.Model):
+    user = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL,blank=True)
+    points_amount = models.IntegerField(default=1)
+    date = models.DateTimeField(auto_now_add=True)
+
+
+class Reward(models.Model):
+    rewardtitle = models.CharField('Title', max_length=100)
+    rewarddescription = models.CharField('Reward Description',max_length=5000)
+    reward_pic = models.ImageField(upload_to='reward_pics', blank=True)
+
+    def __str__(self):
+        return self.rewardtitle
+
+class UseReward(models.Model):
+    reward = models.ForeignKey(Reward, on_delete=models.CASCADE)
+

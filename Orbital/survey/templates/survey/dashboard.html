@@ -44,7 +44,8 @@
             </h3>
               <hr />
               <div class="intro">
-                <a href="{{survey.surveylink}}" class="surveylinkbutton"> {{survey.surveylink}} </a>
+                <a href="{% url 'survey:completedsurveys_update' pk=survey.pk %}" target="_self" onclick="window.open('{{survey.surveylink}}');" class="surveylinkbutton" >{{survey.surveylink}}</a>
+              
               </div>
             </div><!-- /.title-content -->
 

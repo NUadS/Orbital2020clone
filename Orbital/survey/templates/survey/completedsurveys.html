@@ -1,0 +1,25 @@
+{% extends "survey/base.html" %}
+{% load static %}
+{% block css %}
+<!-- link to createdsurveys.css -->
+<link rel="stylesheet" type="text/css" href="{% static 'survey/completedsurveys.css'%}">
+{% endblock %}
+
+{% block body_block %}
+{% load widget_tweaks %}
+
+<div class="main">
+    <h1> Completed Surveys </h1>
+    <ul class="cards">
+        {% for survey in allcompletedsurveys.completedsurveys.all %}
+          <p>{{ survey.surveytitle }}</p>
+
+        {% endfor %}
+    </ul>
+
+</div>
+
+
+
+
+{% endblock %}

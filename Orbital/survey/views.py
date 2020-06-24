@@ -1,18 +1,19 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .forms import UploadSurveyForm
-from .models import UploadSurvey
+from .models import UploadSurvey,CompletedSurveys, UserPoints
 from django.contrib import messages
 from django.contrib.auth.models import User
 from datetime import datetime
 from django.views.generic import ListView, DetailView, CreateView,UpdateView, DeleteView
 from django import forms
 from .filters import SurveyFilter
-
+from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Avg, Sum
 
 @login_required
 def dashboard_view(request):
@@ -29,10 +30,6 @@ def dashboard_view(request):
         'dashboardfilter': survey_filter
     }
     return render(request, 'survey/dashboard.html',context)
-
-@login_required
-def rewards_view(request):
-    return render(request, 'survey/rewards.html')
 
 @login_required
 def survey_view(request):
@@ -92,3 +89,39 @@ class SurveyListView(LoginRequiredMixin,ListView):
 
 class SurveyDetailView(DetailView):
     model=UploadSurvey
+
+
+### VIEWS FOR COMPLETEDSURVEYS
+def completedsurveys_view(request):
+    context = {
+        'allcompletedsurveys': CompletedSurveys.objects.get(user=request.user)
+    }
+    return render(request, 'survey/completedsurveys.html', context)
+
+
+### VIEWS FOR NEWLY COMPLETED SURVEY
+def completedsurveys_update(request, pk):
+    try:
+        user_completedsurveys = CompletedSurveys.objects.get(user=request.user)
+    except ObjectDoesNotExist:
+        user_completedsurveys = CompletedSurveys.objects.create(user=request.user)
+        user_completedsurveys.save()
+
+    newsurvey = UploadSurvey.objects.get(pk=pk)
+    user_completedsurveys.completedsurveys.add(newsurvey)
+    
+
+    earned_points = UserPoints.objects.create(user=request.user)
+
+    messages.success(request, 'Survey {} completed successfully'.format(pk))
+    return redirect('survey:dashboard')
+
+
+### VIEWS FOR REWARDS
+@login_required
+def rewards_view(request):
+    context={
+        'displayedpoints':UserPoints.objects.filter(user=request.user).aggregate(Sum('points_amount'))
+    }
+    return render(request, 'survey/rewards.html', context)
+
