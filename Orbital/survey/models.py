@@ -65,6 +65,7 @@ class UploadSurvey(models.Model):
     def get_absolute_url(self):
         return reverse('survey:tracksurvey-detail', kwargs={'pk':self.pk})
 
+    
 
 class CompletedSurveys(models.Model):
     user = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL,blank=True)
