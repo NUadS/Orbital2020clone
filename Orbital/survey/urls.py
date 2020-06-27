@@ -4,7 +4,7 @@ from django.conf.urls import url
 from survey import views as survey_views
 from accounts import views as accounts_views
 from .views import SurveyListView, SurveyDetailView, SurveyCreateView, SurveyUpdateView, SurveyDeleteView
-
+from cart import views as cart_views
 
 app_name = 'survey'
 
@@ -21,4 +21,6 @@ urlpatterns=[
     path('dashboard/<int:pk>/', survey_views.completedsurveys_update , name='completedsurveys_update'),
 
     path('rewards/', survey_views.rewards_view, name='rewards'),
+    # path('rewards/redeem/<int:pk>/', survey_views.redeem_view, name='redeemreward'),
+
 ]
