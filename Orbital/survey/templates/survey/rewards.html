@@ -1,12 +1,33 @@
 {% extends "survey/base.html" %}
 {% load static %}
-{% block css %}
 
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'survey/rewards.css' %}">
 {% endblock %}
 
 {% block body_block %}
 
-<h1> This is the rewards page </h1>
-{{ displayedpoints }}
+<section>
+  <nav>
+    <div></div>
+    <ul>
+      <li onclick="window.location.href='/shoprewards'" class="active1" >
+      Shop Rewards
+      </li>
+      <li onclick="window.location.href='/redeemedrewards'" >
+      Redeemed Rewards
+    </li>
+    <li onclick="window.location.href='/usedrewards'" >
+      Used Rewards
+    </li>
+      
+    </ul>
+  </nav>
+</section>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>  
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<script type="text/javascript" src="{% static 'survey/nav.js' %}"></script>
 
 {% endblock %}

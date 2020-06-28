@@ -72,20 +72,33 @@ class CompletedSurveys(models.Model):
     completedsurveys = models.ManyToManyField(UploadSurvey)
 
 
-class UserPoints(models.Model):
-    user = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL,blank=True)
-    points_amount = models.IntegerField(default=1)
-    date = models.DateTimeField(auto_now_add=True)
+### FOR REWARDS PAGE
 
+# class UserPoints(models.Model):
+#     user = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL,blank=True)
+#     points_amount = models.IntegerField(default=1)
+#     date = models.DateTimeField(auto_now_add=True)
 
 class Reward(models.Model):
-    rewardtitle = models.CharField('Title', max_length=100)
+    rewardtitle = models.CharField('Title', max_length=255)
     rewarddescription = models.CharField('Reward Description',max_length=5000)
     reward_pic = models.ImageField(upload_to='reward_pics', blank=True)
-
+    requiredpoints = models.IntegerField(default=12)
     def __str__(self):
         return self.rewardtitle
 
-class UseReward(models.Model):
-    reward = models.ForeignKey(Reward, on_delete=models.CASCADE)
+class TotalPoints(models.Model):
+    user = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL,blank=True)
+    points = models.IntegerField(default=0)
+    def attrs(self):
+        for attr, value in self.__dict__.iteritems():
+            yield attr, value
 
+
+class RedeemedRewards(models.Model):
+    user = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL,blank=True)
+    redeemedrewards = models.ManyToManyField(Reward)
+
+class UsedRewards(models.Model):
+    user = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL,blank=True)
+    usedrewards = models.ManyToManyField(Reward)
