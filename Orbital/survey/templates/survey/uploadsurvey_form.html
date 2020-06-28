@@ -2,9 +2,26 @@
 {% load static %}
 {% block css %}
 <link rel="stylesheet" type="text/css" href="{% static 'accounts/profile.css'%}">
-<link rel="stylesheet" type="text/css" href="{% static 'survey/uploadsurvey.css'%}"> 
+<link rel="stylesheet" type="text/css" href="{% static 'survey/uploadsurvey.css'%}">
 
 {% endblock %}
+
+{% block navbar %}
+<div class="nav_box">
+<header class="navbarheader">
+<div class=nav>
+  <ul class=navbarlist>
+    <a href="{% url 'survey:dashboard' %}" role="button">Home</a>
+    <a href="{% url 'accounts:profile' %}" role="button">Profile</a>
+    <a href="{% url 'survey:survey' %}" role="button" class="active">Survey</a>
+    <a href="{% url 'survey:rewards' %}" role="button" >Rewards</a>
+    <a href="{% url 'logout' %}" id="logout">Logout</a>
+  </ul>
+</div>
+</header>
+</div>
+{% endblock %}
+
 
 {% block body_block %}
 {% load widget_tweaks %}
@@ -14,11 +31,11 @@
   <h1 class=survey_header>
     Your Survey
   </h1>
-  
+
   <form method="POST" id="uploadsurvey_form">
     {% csrf_token %}
       <div class=form-row>
-        <label for="surveytitle" class="login__label"> Survey Title </label> 
+        <label for="surveytitle" class="login__label"> Survey Title </label>
         {{form.surveytitle}}
       </div>
 
@@ -68,7 +85,7 @@
           <option value="yes">Yes</option>
           <option value="no">No</option>
         </select>
-  
+
         {% for checkbox in form.gender_filter %}
         <div class="checkbox yes box1 login__input" id='login-input-user'>
             <label class="genderfilter">
@@ -87,7 +104,7 @@
           <option value="yes2">Yes</option>
           <option value="no">No</option>
         </select>
-  
+
         {% for checkbox in form.singaporean_filter %}
         <div class=" yes2 box1 checkbox login__input" id='login-input-user'>
             <label class="genderfilter">
@@ -107,7 +124,7 @@
           <option value="yes3">Yes</option>
           <option value="no">No</option>
         </select>
-  
+
         {% for checkbox in form.faculty_filter %}
         <div class="yes3 box1 checkbox login__input" id='login-input-user'>
             <label class="genderfilter">
@@ -126,7 +143,7 @@
           <option value="yes4">Yes</option>
           <option value="no">No</option>
         </select>
-  
+
         {% for checkbox in form.year_filter %}
         <div class="yes4 box1 checkbox login__input" id='login-input-user'>
             <label class="genderfilter">
@@ -145,7 +162,7 @@
           <option value="yes5">Yes</option>
           <option value="no">No</option>
         </select>
-  
+
         {% for checkbox in form.residential_filter %}
         <div class="yes5 box1 checkbox login__input" id='login-input-user'>
             <label class="genderfilter">
@@ -155,7 +172,7 @@
         {% endfor %}
 
       </div>
-      
+
 
       <div class="box submit-button">
         <a href="#" onclick= "document.getElementById('uploadsurvey_form').submit()" id="update-button">
@@ -166,7 +183,7 @@
             Submit
         </a>
     </div>
-    
+
   </form>
 </div>
 
