@@ -6,7 +6,12 @@
 
 {% block body_block %}
 {% load widget_tweaks %}
-
+<div class="points">
+  Total available points: 
+{% for user in displayedpoints %}
+  {{user.points}}
+{% endfor %}
+</div>
 <section>
   <nav>
     <div></div>
@@ -25,16 +30,35 @@
   </nav>
 </section>
 
-<div class="main">
-    <h1> Used Rewards </h1>
-    <ul class="cards">
-        {% for reward in allusedrewards.usedrewards.all %}
-          <p>{{ reward.rewardtitle }}</p>
+<div class="reward">
+  <h2> Used Rewards:
+  
+    {% for reward in allusedrewards.usedrewards.all %}
+    <div class="indiv">
+      <div class="uh-image">
+        <img class="uh-image-inner" src="{{reward.reward_pic.url}}">
+      </div>
+      <div class="title">
+      {{reward.rewardtitle}}
+      </div>
+    <div class="des">
+      Survey Description:
+      {{reward.rewarddescription}}
+    </div>
+    <div class="pts">
+      Points to Redeem:
+      {{reward.requiredpoints}}
+    </div>
 
-        {% endfor %}
-    </ul>
+    </div>
+    
+    {% endfor %}
 
+  </h2>
+  
+  
 </div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>  
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 <script type="text/javascript" src="{% static 'survey/nav.js' %}"></script>

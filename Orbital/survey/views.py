@@ -184,6 +184,7 @@ def redeem_update(request,pk):
 def redeemedrewards_view(request):
     try:
         context = {
+            'displayedpoints': TotalPoints.objects.get_or_create(user=request.user),
             'allredeemedrewards': RedeemedRewards.objects.get(user=request.user).redeemedrewards.exclude(id__in=UsedRewards.objects.get(user=request.user).usedrewards.values_list('id',flat=True))
         }
     
@@ -210,6 +211,7 @@ def used_update(request,pk):
 def usedrewards_view(request):
     try:
         context = {
+            'displayedpoints': TotalPoints.objects.get_or_create(user=request.user),
             'allusedrewards': UsedRewards.objects.get(user=request.user)
         }
     
