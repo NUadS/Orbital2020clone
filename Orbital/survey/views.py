@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .forms import UploadSurveyForm
-from .models import UploadSurvey,CompletedSurveys, UserPoints
+from .models import UploadSurvey,CompletedSurveys, TotalPoints, Reward, RedeemedRewards, UsedRewards
 from django.contrib import messages
 from django.contrib.auth.models import User
 from datetime import datetime
@@ -14,6 +14,7 @@ from django import forms
 from .filters import SurveyFilter
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Avg, Sum
+from django.db.models import F
 
 @login_required
 def dashboard_view(request):
@@ -128,19 +129,93 @@ def completedsurveys_update(request, pk):
 
     newsurvey = UploadSurvey.objects.get(pk=pk)
     user_completedsurveys.completedsurveys.add(newsurvey)
-    
 
-    earned_points = UserPoints.objects.create(user=request.user)
+    try:
+        user_totalpoints = TotalPoints.objects.get(user=request.user)
+    except ObjectDoesNotExist:
+        user_totalpoints = TotalPoints.objects.create(user=request.user)
+        user_totalpoints = TotalPoints.objects.get(user=request.user)
 
-    messages.success(request, 'Survey completed successfully')
+    user_totalpoints.points = F('points') + 1
+    user_totalpoints.save()
+
+    messages.success(request, 'Survey {} completed successfully'.format(pk))
     return redirect('survey:dashboard')
 
 
 ### VIEWS FOR REWARDS
 @login_required
 def rewards_view(request):
+    return render(request, 'survey/rewards.html')
+
+
+@login_required
+def shoprewards_view(request):
     context={
-        'displayedpoints':UserPoints.objects.filter(user=request.user).aggregate(Sum('points_amount'))
+        'displayedpoints': TotalPoints.objects.get_or_create(user=request.user),
+        'displayedrewards':Reward.objects.all()
     }
-    return render(request, 'survey/rewards.html', context)
+    return render(request, 'survey/shoprewards.html', context)
+
+
+def redeem_update(request,pk):
+    try:
+        user_redeemedrewards = RedeemedRewards.objects.get(user=request.user)
+    except ObjectDoesNotExist:
+        user_redeemedrewards = RedeemedRewards.objects.create(user=request.user)
+        user_redeemedrewards.save()
+
+    newredeemedreward = Reward.objects.get(pk=pk)
+    user_redeemedrewards.redeemedrewards.add(newredeemedreward)
+
+    user_totalpoints = TotalPoints.objects.get(user=request.user)
+    requiredpoints = newredeemedreward.requiredpoints
+
+    if user_totalpoints.points < requiredpoints:
+        messages.error(request, 'Insufficient points to redeem reward')
+    else:
+        user_totalpoints.points = F('points') - requiredpoints
+        user_totalpoints.save()
+        messages.success(request, 'Reward {} redeemed successfully'.format(pk))
+    return redirect('survey:shoprewards')
+
+
+### VIEWS FOR REDEEMEDREWARDS
+def redeemedrewards_view(request):
+    try:
+        context = {
+            'allredeemedrewards': RedeemedRewards.objects.get(user=request.user).redeemedrewards.exclude(id__in=UsedRewards.objects.get(user=request.user).usedrewards.values_list('id',flat=True))
+        }
+    
+    except:
+        context={
+            'allredeemedrewards':None
+        }
+    return render(request, 'survey/redeemedrewards.html', context)
+
+def used_update(request,pk):
+    try:
+        user_usedrewards = UsedRewards.objects.get(user=request.user)
+    except ObjectDoesNotExist:
+        user_usedrewards = UsedRewards.objects.create(user=request.user)
+        user_usedrewards.save()
+
+    newusedreward = Reward.objects.get(pk=pk)
+    user_usedrewards.usedrewards.add(newusedreward)
+
+    return redirect('survey:redeemedrewards')
+
+
+### VIEW FOR USEDREWARDS
+def usedrewards_view(request):
+    try:
+        context = {
+            'allusedrewards': UsedRewards.objects.get(user=request.user)
+        }
+    
+    except:
+        context={
+            'allusedrewards':None
+        }
+    return render(request, 'survey/usedrewards.html', context)
 
