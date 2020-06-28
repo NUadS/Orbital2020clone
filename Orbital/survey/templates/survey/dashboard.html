@@ -5,6 +5,23 @@
 <link rel="stylesheet" type="text/css" href="{% static 'survey/tracksurvey.css'%}">
 <link rel="stylesheet" type="text/css" href="{% static 'accounts/profile.css'%}">
 {% endblock %}
+
+{% block navbar %}
+<div class="nav_box">
+<header class="navbarheader">
+<div class=nav>
+  <ul class=navbarlist>
+    <a href="{% url 'survey:dashboard' %}" role="button" class="active">Home</a>
+    <a href="{% url 'accounts:profile' %}" role="button">Profile</a>
+    <a href="{% url 'survey:survey' %}" role="button" >Survey</a>
+    <a href="{% url 'survey:rewards' %}" role="button">Rewards</a>
+    <a href="{% url 'logout' %}" id="logout">Logout</a>
+  </ul>
+</div>
+</header>
+</div>
+{% endblock %}
+
 {% block body_block %}
 {% load widget_tweaks %}
 
@@ -18,7 +35,7 @@
       <label for="survey-title" class="login__label"> Survey Title</label>
       {{dashboardfilter.form.surveytitle}}
       </div>
-      
+
       <div>
       <label for="survey-cat" class="login__label"> Survey Category</label>
       {{dashboardfilter.form.surveycategory}}
@@ -27,12 +44,12 @@
       <div>
       <button class='search' type="submit">Search</button>
       </div>
-      
+
     </div>
     </form>
 
     <ul class="cards">
-        
+
         {% for survey in dashboardfilter.qs %}
         <li class="cards_item">
 
@@ -45,7 +62,7 @@
               <hr />
               <div class="intro">
                 <a href="{% url 'survey:completedsurveys_update' pk=survey.pk %}" target="_self" onclick="window.open('{{survey.surveylink}}');" class="surveylinkbutton" >{{survey.surveylink}}</a>
-              
+
               </div>
             </div><!-- /.title-content -->
 
@@ -73,7 +90,7 @@
 
       </li>
       {% endfor %}
-      
+
     </ul>
 
 </div>

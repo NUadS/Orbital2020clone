@@ -2,9 +2,26 @@
 {% load static %}
 {% block css %}
 <link rel="stylesheet" type="text/css" href="{% static 'accounts/profile.css'%}">
-<link rel="stylesheet" type="text/css" href="{% static 'survey/delete.css'%}"> 
+<link rel="stylesheet" type="text/css" href="{% static 'survey/delete.css'%}">
 
 {% endblock %}
+
+{% block navbar %}
+<div class="nav_box">
+<header class="navbarheader">
+<div class=nav>
+  <ul class=navbarlist>
+    <a href="{% url 'survey:dashboard' %}" role="button">Home</a>
+    <a href="{% url 'accounts:profile' %}" role="button">Profile</a>
+    <a href="{% url 'survey:survey' %}" role="button" class="active">Survey</a>
+    <a href="{% url 'survey:rewards' %}" role="button" >Rewards</a>
+    <a href="{% url 'logout' %}" id="logout">Logout</a>
+  </ul>
+</div>
+</header>
+</div>
+{% endblock %}
+
 
 {% block body_block %}
 {% load widget_tweaks %}
@@ -13,7 +30,7 @@
   <h1 class=survey_header>
     Delete Post
   </h1>
-  
+
   <form method="POST" id="deletesurvey_form">
     {% csrf_token %}
     <h2> Are you sure you want to delete the survey {{ object.surveytitle }}?</h2>
@@ -39,7 +56,7 @@
   </div>
 
 
-    
+
   </form>
 </div>
 
