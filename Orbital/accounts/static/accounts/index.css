@@ -1,11 +1,5 @@
 /* FOR INDEX PAGE */
 /*title: accounts on index page*/
-@font-face {
-    font-family: Clip;
-    src: url("https://acupoftee.github.io/fonts/Clip.ttf");
-  }
-  
-  
   .sign {
     position: absolute;
     display: flex;
@@ -31,7 +25,7 @@
       0 -0.5rem 2rem #ff2483, 0 0.5rem 3rem #ff2483;
     animation: shine 2s forwards, flicker 5s infinite;
   }
-  
+
   @keyframes blink {
     0%,
     22%,
@@ -53,15 +47,15 @@
       text-shadow: none;
     }
   }
-  
+
   .flicker {
     animation: shine 2s forwards, blink 3s 2s infinite;
   }
-  
+
   .fast-flicker {
     animation: shine 2s forwards, blink 10s 1s infinite;
   }
-  
+
   @keyframes shine {
     0% {
       color: #6b1839;
@@ -74,135 +68,135 @@
         0 -0.5rem 2rem #ff2483, 0 0.5rem 3rem #ff2483;
     }
   }
-  
+
   @keyframes flicker {
     from {
       opacity: 1;
     }
-  
+
     4% {
       opacity: 0.9;
     }
-  
+
     6% {
       opacity: 0.85;
     }
-  
+
     8% {
       opacity: 0.95;
     }
-  
+
     10% {
       opacity: 0.9;
     }
-  
+
     11% {
       opacity: 0.922;
     }
-  
+
     12% {
       opacity: 0.9;
     }
-  
+
     14% {
       opacity: 0.95;
     }
-  
+
     16% {
       opacity: 0.98;
     }
-  
+
     17% {
       opacity: 0.9;
     }
-  
+
     19% {
       opacity: 0.93;
     }
-  
+
     20% {
       opacity: 0.99;
     }
-  
+
     24% {
       opacity: 1;
     }
-  
+
     26% {
       opacity: 0.94;
     }
-  
+
     28% {
       opacity: 0.98;
     }
-  
+
     37% {
       opacity: 0.93;
     }
-  
+
     38% {
       opacity: 0.5;
     }
-  
+
     39% {
       opacity: 0.96;
     }
-  
+
     42% {
       opacity: 1;
     }
-  
+
     44% {
       opacity: 0.97;
     }
-  
+
     46% {
       opacity: 0.94;
     }
-  
+
     56% {
       opacity: 0.9;
     }
-  
+
     58% {
       opacity: 0.9;
     }
-  
+
     60% {
       opacity: 0.99;
     }
-  
+
     68% {
       opacity: 1;
     }
-  
+
     70% {
       opacity: 0.9;
     }
-  
+
     72% {
       opacity: 0.95;
     }
-  
+
     93% {
       opacity: 0.93;
     }
-  
+
     95% {
       opacity: 0.95;
     }
-  
+
     97% {
       opacity: 0.93;
     }
-  
+
     to {
       opacity: 1;
     }
   }
-  
+
     /*login, register buttons on index page*/
-  
+
   .btns{
     display: flex;
     justify-content: center;
@@ -226,7 +220,7 @@
     text-transform: uppercase;
     letter-spacing: 4px;
     transition: 0.5s;
-  
+
   }
   .btn:hover{
     background-color: #ffe6ff;
@@ -234,5 +228,3 @@
     box-shadow: 0px 0px 5px #ff65bd, 0px 0px 25px #ff65bd, 0px 0px 50px #ff65bd, 0px 0px 100px #ff65bd;
     -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
   }
-  
-  

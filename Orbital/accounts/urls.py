@@ -14,6 +14,11 @@ app_name = 'accounts'
 urlpatterns=[
     url(r'^register/$',views.register,name='register'),
     url(r'^user_login/$',views.user_login, name='user_login'),
-    url(r'^profile/$', views.profile_view, name='profile')
-    
+    url(r'^profile/$', views.profile_view, name='profile'),
+    url(r'^oauth/', include('social_django.urls', namespace='social')),
+
 ]
+
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'home'
