@@ -1,0 +1,24 @@
+{% extends "survey/base.html" %}
+{% load static %}
+{% block css %}
+<!-- link to redeemedrewards.css -->
+{% endblock %}
+
+{% block body_block %}
+{% load widget_tweaks %}
+
+<div class="main">
+    <h1> RedeemedRewards </h1>
+    <ul class="cards">
+        {% for reward in allredeemedrewards.redeemedrewards.all %}
+          <p>{{ reward.rewardtitle }}</p>
+
+        {% endfor %}
+    </ul>
+
+</div>
+
+
+
+
+{% endblock %}

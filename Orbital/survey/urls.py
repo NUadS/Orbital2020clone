@@ -21,6 +21,7 @@ urlpatterns=[
     path('dashboard/<int:pk>/', survey_views.completedsurveys_update , name='completedsurveys_update'),
 
     path('rewards/', survey_views.rewards_view, name='rewards'),
-    # path('rewards/redeem/<int:pk>/', survey_views.redeem_view, name='redeemreward'),
-
+    path('shoprewards/', survey_views.shoprewards_view, name='shoprewards'),
+    path('rewards/<int:pk>', survey_views.redeem_update, name='redeem_update'),
+    path('redeemedrewards/', survey_views.redeemedrewards_view , name='redeemedrewards')
 ]

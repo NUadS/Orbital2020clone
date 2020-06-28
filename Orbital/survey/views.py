@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .forms import UploadSurveyForm
-from .models import UploadSurvey, CompletedSurveys, TotalPoints, Reward
+from .models import UploadSurvey, CompletedSurveys, TotalPoints, Reward, RedeemedRewards
 from django.contrib import messages
 from django.contrib.auth.models import User
 from datetime import datetime
@@ -17,11 +17,10 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import F
 
 
+
 @login_required
 def survey_view(request):
     return render(request, 'survey/survey.html')
-
-
 
 ### VIEWS FOR UPLOADSURVEY
 class SurveyCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
@@ -130,10 +129,43 @@ def completedsurveys_update(request, pk):
 ### VIEWS FOR REWARDS
 @login_required
 def rewards_view(request):
+    return render(request, 'survey/rewards.html')
+
+
+@login_required
+def shoprewards_view(request):
     context={
         'displayedpoints': TotalPoints.objects.get_or_create(user=request.user),
         'displayedrewards':Reward.objects.all()
     }
-    return render(request, 'survey/rewards.html', context)
+    return render(request, 'survey/shoprewards.html', context)
 
-# def redeem_view(request,pk):
+
+def redeem_update(request,pk):
+    try:
+        user_redeemedrewards = RedeemedRewards.objects.get(user=request.user)
+    except ObjectDoesNotExist:
+        user_redeemedrewards = RedeemedRewards.objects.create(user=request.user)
+        user_redeemedrewards.save()
+
+    newredeemedreward = Reward.objects.get(pk=pk)
+    user_redeemedrewards.redeemedrewards.add(newredeemedreward)
+
+    user_totalpoints = TotalPoints.objects.get(user=request.user)
+    requiredpoints = newredeemedreward.requiredpoints
+
+    if user_totalpoints.points < requiredpoints:
+        messages.error(request, 'Insufficient points to redeem reward')
+    else:
+        user_totalpoints.points = F('points') - requiredpoints
+        user_totalpoints.save()
+        messages.success(request, 'Reward {} redeemed successfully'.format(pk))
+    return redirect('survey:shoprewards')
+
+
+### VIEWS FOR REDEEMEDREWARDS
+def redeemedrewards_view(request):
+    context = {
+        'allredeemedrewards': RedeemedRewards.objects.get(user=request.user)
+    }
+    return render(request, 'survey/redeemedrewards.html', context)

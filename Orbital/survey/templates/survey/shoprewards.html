@@ -1,0 +1,33 @@
+{% extends "survey/base.html" %}
+{% load static %}
+{% block css %}
+
+{% endblock %}
+
+{% block body_block %}
+
+<h2> Total Points:
+{% for user in displayedpoints %}
+   {{user.points}}
+{% endfor %}
+</h2>
+
+<br>
+
+
+<h2> All Rewards:
+<br>
+{% for reward in displayedrewards %}
+  <h3>
+    <a href="{% url 'survey:redeem_update' pk=reward.pk %}" >Redeem Reward!</a>
+   <td>{{reward.rewardtitle}}</td>
+   <li>{{reward.rewarddescription}}</li>
+   <li>{{reward.requiredpoints}}</li>
+   <br>
+{% endfor %}
+</h2>
+
+
+
+
+{% endblock %}

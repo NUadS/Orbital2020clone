@@ -88,3 +88,11 @@ class Reward(models.Model):
 class TotalPoints(models.Model):
     user = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL,blank=True)
     points = models.IntegerField(default=0)
+    def attrs(self):
+        for attr, value in self.__dict__.iteritems():
+            yield attr, value
+
+
+class RedeemedRewards(models.Model):
+    user = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL,blank=True)
+    redeemedrewards = models.ManyToManyField(Reward)
