@@ -18,13 +18,26 @@ from django.db.models import Avg, Sum
 @login_required
 def dashboard_view(request):
     profile=request.user.userprofileinfo
-    target_filter= UploadSurvey.objects.filter(
-            gender_filter__gender_filter=profile.gender, 
-            year_filter__year_filter=profile.year_in_school, 
-            faculty_filter__faculty_filter=profile.faculty, 
-            singaporean_filter__singaporean_filter=profile.singaporean,
-            residential_filter__residential_filter=profile.currentresidentialtype
-        )
+    try:
+        target_filter= UploadSurvey.objects.filter(
+                gender_filter__gender_filter=profile.gender, 
+                year_filter__year_filter=profile.year_in_school, 
+                faculty_filter__faculty_filter=profile.faculty, 
+                singaporean_filter__singaporean_filter=profile.singaporean,
+                residential_filter__residential_filter=profile.currentresidentialtype
+                
+            ).exclude(user=request.user).exclude(id__in=CompletedSurveys.objects.get(user=request.user).completedsurveys.values_list('id',flat=True))
+        
+    except:
+        target_filter= UploadSurvey.objects.filter(
+                gender_filter__gender_filter=profile.gender, 
+                year_filter__year_filter=profile.year_in_school, 
+                faculty_filter__faculty_filter=profile.faculty, 
+                singaporean_filter__singaporean_filter=profile.singaporean,
+                residential_filter__residential_filter=profile.currentresidentialtype
+            )
+
+
     survey_filter= SurveyFilter(request.GET, queryset=target_filter)
     context={
         'dashboardfilter': survey_filter
@@ -93,9 +106,15 @@ class SurveyDetailView(DetailView):
 
 ### VIEWS FOR COMPLETEDSURVEYS
 def completedsurveys_view(request):
-    context = {
-        'allcompletedsurveys': CompletedSurveys.objects.get(user=request.user)
-    }
+    try:
+        context = {
+            'allcompletedsurveys': CompletedSurveys.objects.get(user=request.user)
+        }
+    
+    except:
+        context={
+            'allcompletedsurveys': None
+        }
     return render(request, 'survey/completedsurveys.html', context)
 
 
@@ -113,7 +132,7 @@ def completedsurveys_update(request, pk):
 
     earned_points = UserPoints.objects.create(user=request.user)
 
-    messages.success(request, 'Survey {} completed successfully'.format(pk))
+    messages.success(request, 'Survey completed successfully')
     return redirect('survey:dashboard')
 
 
