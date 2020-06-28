@@ -1,0 +1,53 @@
+{% extends "survey/base.html" %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'survey/rewards.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<section>
+  <nav>
+    <div></div>
+    <ul>
+      <li onclick="window.location.href='/shoprewards'" class="active1">
+      Shop Rewards
+      </li>
+      <li onclick="window.location.href='/redeemedrewards'">
+      Redeemed Rewards
+    </li>
+    <li onclick="window.location.href='/usedrewards'">
+      Used Rewards
+    </li>
+      
+    </ul>
+  </nav>
+</section>
+
+
+<h2> Total Points:
+{% for user in displayedpoints %}
+   {{user.points}}
+{% endfor %}
+</h2>
+
+<br>
+
+
+<h2> All Rewards:
+<br>
+{% for reward in displayedrewards %}
+  <h3>
+    <a href="{% url 'survey:redeem_update' pk=reward.pk %}" >Redeem Reward!</a>
+   <td>{{reward.rewardtitle}}</td>
+   <li>{{reward.rewarddescription}}</li>
+   <li>{{reward.requiredpoints}}</li>
+   <br>
+{% endfor %}
+</h2>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>  
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<script type="text/javascript" src="{% static 'survey/nav.js' %}"></script>
+
+
+
+{% endblock %}
