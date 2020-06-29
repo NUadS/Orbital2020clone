@@ -11,7 +11,7 @@ def index(request):
     if request.user.is_authenticated:
         return redirect('survey:dashboard')
     else:
-        return render(request, 'Orbital/index.html')
+        return render(request, 'index.html') 
 
 @login_required
 def special(request):
