@@ -36,7 +36,7 @@ def dashboard_view(request):
                 faculty_filter__faculty_filter=profile.faculty, 
                 singaporean_filter__singaporean_filter=profile.singaporean,
                 residential_filter__residential_filter=profile.currentresidentialtype
-            )
+            ).exclude(user=request.user)
 
 
     survey_filter= SurveyFilter(request.GET, queryset=target_filter)
@@ -190,8 +190,10 @@ def redeemedrewards_view(request):
     
     except:
         context={
-            'allredeemedrewards':None
+            'displayedpoints': TotalPoints.objects.get_or_create(user=request.user),
+            'allredeemedrewards': RedeemedRewards.objects.get(user=request.user).redeemedrewards.all()
         }
+
     return render(request, 'survey/redeemedrewards.html', context)
 
 def used_update(request,pk):
@@ -217,6 +219,7 @@ def usedrewards_view(request):
     
     except:
         context={
+            'displayedpoints': TotalPoints.objects.get_or_create(user=request.user),
             'allusedrewards':None
         }
     return render(request, 'survey/usedrewards.html', context)
