@@ -11,7 +11,7 @@ def index(request):
     if request.user.is_authenticated:
         return redirect('survey:dashboard')
     else:
-        return render(request, 'accounts/index.html') 
+        return render(request, 'accounts/index.html')
 
 @login_required
 def special(request):
@@ -59,7 +59,8 @@ def register(request):
             return redirect('index')
 
         else:
-            print(user_form.errors,profile_form.errors)
+            messages.error(request,user_form.errors)
+            messages.error(request,profile_form.errors)
     else:
         user_form = UserForm()
         profile_form = UserProfileInfoForm()
@@ -67,8 +68,6 @@ def register(request):
                           {'user_form':user_form,
                            'profile_form':profile_form,
                            'registered':registered})
-
-
 
 def user_login(request):
     if request.method == 'POST':
@@ -83,8 +82,8 @@ def user_login(request):
             else:
                 return HttpResponse("Your account was inactive.")
         else:
-            print("Someone tried to login and failed.")
-            print("They used username: {} and password: {}".format(username,password))
+            messages.error("Someone tried to login and failed.")
+            messages.error("They used username: {} and password: {}".format(username,password))
             return HttpResponse("Invalid login details given")
     else:
         return render(request, 'accounts/login.html', {})

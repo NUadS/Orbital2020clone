@@ -7,7 +7,6 @@
 
 
 {% block body_block %}
-
   <div id="login-box" class="box">
     <h2>Login</h2>
     <form method="POST" action="{% url 'accounts:user_login' %}" id="login_form" >
@@ -28,6 +27,12 @@
         Login
       </a>
     </form>
+
+    <br>
+    <a href="#">Login with Instagram</a>
+    <a href="{% url 'social:begin' 'google' %}">Login with Google</a>
+
+
     <div class="text-muted">
       <br>
       Not a user? Register <a href="{% url 'accounts:register' %}"> here</a>
