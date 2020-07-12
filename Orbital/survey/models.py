@@ -65,7 +65,7 @@ class UploadSurvey(models.Model):
     def get_absolute_url(self):
         return reverse('survey:tracksurvey-detail', kwargs={'pk':self.pk})
 
-    
+
 
 class CompletedSurveys(models.Model):
     user = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL,blank=True)
@@ -102,3 +102,18 @@ class RedeemedRewards(models.Model):
 class UsedRewards(models.Model):
     user = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL,blank=True)
     usedrewards = models.ManyToManyField(Reward)
+
+
+### FOR REPORT PAGE
+
+class Report(models.Model):
+    user = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL,blank=True)
+    #creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    postedDate = models.DateField(default=timezone.now)
+    subject = models.CharField('Report Subject', max_length=200)
+    details = models.CharField('Report Details',
+        max_length=10000,
+        help_text="Include your report details here!")
+
+    def __str__(self):
+        return self.subject

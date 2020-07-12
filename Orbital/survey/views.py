@@ -4,8 +4,8 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from .forms import UploadSurveyForm
-from .models import UploadSurvey,CompletedSurveys, TotalPoints, Reward, RedeemedRewards, UsedRewards
+from .forms import UploadSurveyForm, ReportForm
+from .models import UploadSurvey,CompletedSurveys, TotalPoints, Reward, RedeemedRewards, UsedRewards, Report
 from django.contrib import messages
 from django.contrib.auth.models import User
 from datetime import datetime
@@ -21,19 +21,19 @@ def dashboard_view(request):
     profile=request.user.userprofileinfo
     try:
         target_filter= UploadSurvey.objects.filter(
-                gender_filter__gender_filter=profile.gender, 
-                year_filter__year_filter=profile.year_in_school, 
-                faculty_filter__faculty_filter=profile.faculty, 
+                gender_filter__gender_filter=profile.gender,
+                year_filter__year_filter=profile.year_in_school,
+                faculty_filter__faculty_filter=profile.faculty,
                 singaporean_filter__singaporean_filter=profile.singaporean,
                 residential_filter__residential_filter=profile.currentresidentialtype
-                
+
             ).exclude(user=request.user).exclude(id__in=CompletedSurveys.objects.get(user=request.user).completedsurveys.values_list('id',flat=True))
-        
+
     except:
         target_filter= UploadSurvey.objects.filter(
-                gender_filter__gender_filter=profile.gender, 
-                year_filter__year_filter=profile.year_in_school, 
-                faculty_filter__faculty_filter=profile.faculty, 
+                gender_filter__gender_filter=profile.gender,
+                year_filter__year_filter=profile.year_in_school,
+                faculty_filter__faculty_filter=profile.faculty,
                 singaporean_filter__singaporean_filter=profile.singaporean,
                 residential_filter__residential_filter=profile.currentresidentialtype
             ).exclude(user=request.user)
@@ -111,7 +111,7 @@ def completedsurveys_view(request):
         context = {
             'allcompletedsurveys': CompletedSurveys.objects.get(user=request.user)
         }
-    
+
     except:
         context={
             'allcompletedsurveys': None
@@ -187,7 +187,7 @@ def redeemedrewards_view(request):
             'displayedpoints': TotalPoints.objects.get_or_create(user=request.user),
             'allredeemedrewards': RedeemedRewards.objects.get(user=request.user).redeemedrewards.exclude(id__in=UsedRewards.objects.get(user=request.user).usedrewards.values_list('id',flat=True))
         }
-    
+
     except:
         context={
             'displayedpoints': TotalPoints.objects.get_or_create(user=request.user),
@@ -216,7 +216,7 @@ def usedrewards_view(request):
             'displayedpoints': TotalPoints.objects.get_or_create(user=request.user),
             'allusedrewards': UsedRewards.objects.get(user=request.user)
         }
-    
+
     except:
         context={
             'displayedpoints': TotalPoints.objects.get_or_create(user=request.user),
@@ -224,3 +224,16 @@ def usedrewards_view(request):
         }
     return render(request, 'survey/usedrewards.html', context)
 
+
+### VIEW FOR REPORT
+@login_required
+def report_view(request):
+    if request.method == 'POST':
+        report_form = ReportForm(request.POST, instance=request.user)
+        if report_form.is_valid:
+            report_form.save()
+            messages.success(request, 'Your report is successfully made!')
+            return redirect('survey:dashboard')
+    else:
+        report_form = ReportForm(instance=request.user)
+    return render(request, 'survey/report.html', {'form':report_form})

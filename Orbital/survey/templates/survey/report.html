@@ -1,0 +1,55 @@
+{% extends "survey/base.html" %}
+{% load static %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block navbar %}
+<div class="nav_box">
+<header class="navbarheader">
+<div class=nav>
+  <ul class=navbarlist>
+    <a href="{% url 'survey:dashboard' %}" role="button">Home</a>
+    <a href="{% url 'accounts:profile' %}" role="button">Profile</a>
+    <a href="{% url 'survey:survey' %}" role="button" >Survey</a>
+    <a href="{% url 'survey:shoprewards' %}" role="button">Rewards</a>
+    <a href="{% url 'survey:report' %}" role="button" class="active">Report</a>
+    <a href="{% url 'logout' %}" id="logout">Logout</a>
+  </ul>
+</div>
+</header>
+</div>
+{% endblock %}
+
+
+{% block body_block %}
+{% load widget_tweaks %}
+<form method="POST" id="report_form">
+  {% csrf_token %}
+    <div class=form-row>
+      <label for="subject" class="login__label"> Report Subject </label>
+      {{form.subject}}
+    </div>
+
+    <div class=form-row>
+
+      <label for="details" class="login__label"> Report Details </label>
+      {{form.details}}
+
+    </div>
+
+    <div class="box submit-button">
+      <a href="#" onclick= "document.getElementById('report_form').submit()" id="submit-button">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          Submit
+      </a>
+    </div>
+
+</form>
+
+
+{% endblock %}

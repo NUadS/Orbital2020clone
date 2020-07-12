@@ -305,10 +305,3 @@ class UserProfileInfo(models.Model):
 
     def __str__(self):
         return f'{self.user.username} Profile'
-
-    # def clean_username(self):
-    #     username = self.cleaned_data['name'].lower()
-    #     r = User.objects.filter(username=username)
-    #     if r.count():
-    #         raise  ValidationError("Username already exists")
-    #     return username
