@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'widget_tweaks',
-    'django.contrib.sites',
+    # 'django.contrib.sites',
     'social_django'
      ]
 
@@ -86,10 +86,9 @@ WSGI_APPLICATION = 'Orbital.wsgi.application'
 
 AUTHENTICATION_BACKENDS = (
 
-    'social_core.backends.instagram.InstagramOAuth2',
     'social_core.backends.github.GithubOAuth2',
-
     'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
 
     'django.contrib.auth.backends.ModelBackend',
 )
@@ -123,11 +122,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '817452921891-scf879cjbmva7n6e0jjetgfcft1p650r.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '817452921891-femb94q9dpu34ted6adicngadm0vguvo.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'XcEa5dzMQaO-XdL_W4XT3I4L'
 
-# SOCIAL_AUTH_GITHUB_KEY = '9a20d384ce74a2a668f5'
-# SOCIAL_AUTH_GITHUB_SECRET = 'd1c12a7fdc0642a6665e628acddb76da1057f492'
+SOCIAL_AUTH_GITHUB_KEY = 'f1369e8112382a4556a3'
+SOCIAL_AUTH_GITHUB_SECRET = '29958e5515a62fd064953e1dba67b28d5ac9a2df'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '1917714621698915'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'd7a2bad175d2ad0dba40f56a1009efcb'
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
@@ -155,6 +157,6 @@ STATICFILES_DIRS = [STATIC_DIR,]
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 
-# LOGIN_URL = 'user_login'
-# LOGOUT_URL = 'logout'
-# LOGIN_REDIRECT_URL = 'dashboard'
+LOGIN_URL = 'accounts:user_login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'survey:dashboard'
